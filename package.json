@@ -43,15 +43,10 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "vuejs-accessibility/label-has-for": [
+      "prettier/prettier": [
         "error",
         {
-          "required": {
-            "some": [
-              "nesting",
-              "id"
-            ]
-          }
+          "endOfLine": "auto"
         }
       ]
     },
