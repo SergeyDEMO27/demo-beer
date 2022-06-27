@@ -42,7 +42,38 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "vuejs-accessibility/label-has-for": [
+        "error",
+        {
+          "required": {
+            "some": [
+              "nesting",
+              "id"
+            ]
+          }
+        }
+      ]
+    },
+    "settings": {
+      "import/resolver": {
+        "alias": {
+          "map": [
+            [
+              "@",
+              "./src"
+            ]
+          ],
+          "extensions": [
+            ".js",
+            ".ts",
+            ".tsx",
+            ".jsx",
+            ".json"
+          ]
+        }
+      }
+    }
   },
   "browserslist": [
     "> 1%",
