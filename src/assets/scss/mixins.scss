@@ -26,9 +26,9 @@
 }
 
 @mixin default-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 80px 50px;
+  max-width: 1300px;
+  margin: auto;
+  padding: 15px;
 }
 
 @mixin center-element {

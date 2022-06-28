@@ -1,9 +1,8 @@
 import { createStore } from "vuex";
+import allBeersModule from "@/store/allBeersModule";
 
 export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+  modules: {
+    allBeers: allBeersModule,
+  },
 });

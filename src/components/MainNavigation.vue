@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  name: "MainNavigation",
   props: {
     navItems: Array,
   },

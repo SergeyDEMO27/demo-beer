@@ -15,6 +15,7 @@
 import MainNavigation from "@/components/MainNavigation.vue";
 
 export default {
+  name: "MainHeader",
   components: {
     MainNavigation,
   },
@@ -37,11 +38,9 @@ export default {
 }
 
 .main-header__container {
+  @include default-container;
   display: flex;
   align-items: center;
-  max-width: 1300px;
-  margin: auto;
-  padding: 15px;
 }
 
 .main-header__logo {
