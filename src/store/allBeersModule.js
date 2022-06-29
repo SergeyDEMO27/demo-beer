@@ -21,11 +21,15 @@ export default {
       });
       commit("setAllBeers", beerParser(response.data));
     },
-    async getSearchBeer({ commit }, { beerName }) {
+    async getSearchBeer({ commit }, { beerParams }) {
+      const customParams = Object.keys(beerParams).reduce((acc, param) => {
+        if (beerParams[param]) {
+          acc[param] = beerParams[param];
+        }
+        return acc;
+      }, {});
       const response = await axios.get("https://api.punkapi.com/v2/beers", {
-        params: {
-          beer_name: beerName,
-        },
+        params: customParams,
       });
       commit("setAllBeers", beerParser(response.data));
     },

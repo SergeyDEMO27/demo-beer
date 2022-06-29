@@ -4,13 +4,14 @@
     :id="title"
     :type="inputType"
     :value="inputValue"
-    @input="(event) => $emit('update:inputValue', event.target.value)"
+    @input="(event) => this.$emit('updateValue', event.target.value)"
   />
 </template>
 
 <script>
 export default {
   name: "MainInput",
+  emits: ["updateValue"],
   props: {
     title: String,
     inputType: String,
