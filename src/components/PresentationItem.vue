@@ -1,5 +1,8 @@
 <template>
-  <div class="presentation-item">
+  <router-link
+    :to="`/product/${presentationItem.id}`"
+    class="presentation-item"
+  >
     <div class="presentation-item__picture">
       <img
         class="presentation-item__image"
@@ -26,7 +29,7 @@
         <span>Og</span>{{ presentationItem.target_og }}
       </p>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
