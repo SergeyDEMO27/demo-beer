@@ -1,93 +1,172 @@
 <template>
   <section class="product-preview">
     <div class="product-preview__container">
-      <p>#{{ oneBeer.id }} {{ oneBeer.first_brewed }}</p>
-      <h1>{{ oneBeer.name }}</h1>
-      <p>
-        {{ oneBeer.tagline }} abv{{ oneBeer.abv }} ibu{{ oneBeer.ibu }} og{{
-          oneBeer.target_og
-        }}
-      </p>
-      <div>
-        <ProductInfo :title="'The beer is'">
-          {{ oneBeer.description }}
-        </ProductInfo>
-        <div>
-          <h3>Basics</h3>
-          <ul>
-            <!-- <li>Volume {{ oneBeer.volume.value }}L</li> -->
-            <!-- <li>Boil volume {{ oneBeer.boil_volume.value }}L</li> -->
-            <li>Abv {{ oneBeer.abv }}%</li>
-            <li>Target fg {{ oneBeer.target_fg }}</li>
-            <li>Target og {{ oneBeer.target_og }}</li>
-            <li>Ebc {{ oneBeer.ebc }}</li>
-            <li>Srm {{ oneBeer.srm }}</li>
-            <li>Ph {{ oneBeer.ph }}</li>
-            <li>Attenuation level {{ oneBeer.attenuation_level }}</li>
-          </ul>
-        </div>
-        <div>
-          <div>
-            <h3>METHOD/TIMINGS</h3>
-            <ul>
-              <li>
-                MASH TEMP
-                <!-- {{ oneBeer.method.mash_temp.temp.value }} -->
-                <!-- {{ oneBeer.method.mash_temp.temp.unit }}
-              {{ oneBeer.method.mash_temp.duration }} -->
-              </li>
-            </ul>
+      <h1 class="product-preview__title">
+        <span class="product-preview__title-number">#{{ oneBeer.id }}</span>
+        {{ oneBeer.name }}
+        <span class="product-preview__title-date">{{
+          oneBeer.firstBrewed
+        }}</span>
+      </h1>
+      <div class="product-preview__tagcontainer">
+        <p class="product-preview__tag">{{ oneBeer.tagline }}</p>
+        <ul class="product-preview__abv">
+          <li>
+            <span>abv</span>
+            <span>{{ oneBeer.abv }}%</span>
+          </li>
+          <li>
+            <span>ibu</span>
+            <span>{{ oneBeer.ibu }}</span>
+          </li>
+          <li>
+            <span>og</span>
+            <span>{{ oneBeer.targetOg }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="product-preview__wrapper">
+        <div class="product-preview__infocontainer">
+          <div class="product-preview__info">
+            <h3 class="product-preview__info-title">The beer is</h3>
+            <div class="product-preview__description">
+              <p class="product-preview__description-beer">
+                {{ oneBeer.description }}
+              </p>
+            </div>
+          </div>
+          <div class="product-preview__info">
+            <h3 class="product-preview__info-title">Basics</h3>
+            <div class="product-preview__description">
+              <ul class="product-preview__base">
+                <li>
+                  <span class="product-preview__base-title">Volume</span>
+                  <span>{{ oneBeer.volumeValue }}L</span>
+                </li>
+                <li>
+                  <span class="product-preview__base-title">Boil volume</span>
+                  <span>{{ oneBeer.boilValue }}L</span>
+                </li>
+                <li>
+                  <span class="product-preview__base-title">Abv</span>
+                  <span>{{ oneBeer.abv }}%</span>
+                </li>
+                <li>
+                  <span class="product-preview__base-title">Target fg</span>
+                  <span>{{ oneBeer.targetFg }}</span>
+                </li>
+                <li>
+                  <span class="product-preview__base-title">Target og</span>
+                  <span>{{ oneBeer.targetOg }}</span>
+                </li>
+                <li>
+                  <span class="product-preview__base-title">Ebc</span>
+                  <span>{{ oneBeer.ebc }}</span>
+                </li>
+                <li>
+                  <span class="product-preview__base-title">Srm</span>
+                  <span>{{ oneBeer.srm }}</span>
+                </li>
+                <li>
+                  <span class="product-preview__base-title">Ph</span>
+                  <span>{{ oneBeer.ph }}</span>
+                </li>
+                <li>
+                  <span class="product-preview__base-title"
+                    >Attenuation level</span
+                  >
+                  <span>{{ oneBeer.attenuationLevel }}%</span>
+                </li>
+              </ul>
+            </div>
           </div>
           <div>
-            <h3>FERMENTATION</h3>
-            <ul>
-              <li>
-                FER
-                <!-- {{ oneBeer.method.fermentation.temp.value }}
-                {{ oneBeer.method.fermentation.temp.unit }} -->
-              </li>
-            </ul>
+            <div class="product-preview__info">
+              <h3 class="product-preview__info-title">METHOD/TIMINGS</h3>
+              <div class="product-preview__description">
+                <ul class="product-preview__base">
+                  <li>
+                    <span class="product-preview__base-title">MASH TEMP</span>
+                    <span>{{ oneBeer.mashTemp }}℃</span>
+                    <span>{{ oneBeer.mashDur }}min</span>
+                  </li>
+                  <li>
+                    <span class="product-preview__base-title"
+                      >fermentation</span
+                    >
+                    <span>{{ oneBeer.fermentValue }}℃</span>
+                  </li>
+                  <li class="product-preview__twist">
+                    <span class="product-preview__base-title">Twist</span>
+                    <span>{{ oneBeer.twist }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div>
-            <h3>TWIST</h3>
-            <ul>
-              <li>
-                TW
-                <!-- {{ oneBeer.method.twist }} -->
-              </li>
-            </ul>
+        </div>
+        <div class="product-preview__infocontainer">
+          <div class="product-preview__info">
+            <h3 class="product-preview__info-title">INGREDIENTS</h3>
+            <div class="product-preview__description">
+              <h3 class="product-preview__category">Malt</h3>
+              <ul class="product-preview__base">
+                <li v-for="item in oneBeer.malt" :key="item">
+                  <span class="product-preview__base-title">{{
+                    item.name
+                  }}</span>
+                  <span>{{ item.amount.value }} {{ item.amount.unit }}</span>
+                </li>
+              </ul>
+              <h3 class="product-preview__category">Hops</h3>
+              <ul class="product-preview__base">
+                <li v-for="item in oneBeer.hops" :key="item">
+                  <span class="product-preview__base-title">{{
+                    item.name
+                  }}</span>
+                  <span>{{ item.amount.value }} {{ item.amount.unit }}</span>
+                  <span>{{ item.add }}</span>
+                  <span>{{ item.attribute }}</span>
+                </li>
+              </ul>
+              <h3 class="product-preview__category">Yeast</h3>
+              <p class="product-preview__yeast">{{ oneBeer.yeast }}</p>
+            </div>
+          </div>
+          <div class="product-preview__info">
+            <h3 class="product-preview__info-title">Food</h3>
+            <div class="product-preview__description">
+              <ul class="product-preview__base product-preview__base--food">
+                <li v-for="food in oneBeer.foodPairing" :key="food">
+                  {{ food }}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div>
-          <h3>INGREDIENTS</h3>
-          <h3>Malt</h3>
-          <ul>
-            <li>
-              <!-- {{ oneBeer.ingredients.malt.name }}
-              {{ oneBeer.ingredients.malt.amount.value }} -->
-            </li>
-          </ul>
-          <h3>Hops</h3>
-          <ul>
-            <li>
-              <!-- {{ oneBeer.ingredients.malt.name }}
-              {{ oneBeer.ingredients.malt.amount.value }} -->
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h3>Food</h3>
-          <ul>
-            <li v-for="food in oneBeer.food_pairing" :key="food">{{ food }}</li>
-          </ul>
-        </div>
-        <div>
-          <h3>BREWER'S TIP</h3>
-          <p>{{ oneBeer.brewers_tips }}</p>
-        </div>
-        <div>
-          <h3>Contributed by</h3>
-          <p>{{ oneBeer.contributed_by }}</p>
+        <div class="product-preview__infocontainer">
+          <div class="product-preview__info">
+            <h3 class="product-preview__info-title">PACKAGING</h3>
+            <div
+              class="product-preview__description product-preview__description--image"
+            >
+              <div class="product-preview__picture">
+                <img :src="oneBeer.imageUrl" :alt="oneBeer.name" />
+              </div>
+            </div>
+          </div>
+          <div class="product-preview__info">
+            <h3 class="product-preview__info-title">BREWER'S TIP</h3>
+            <div class="product-preview__description">
+              <p>{{ oneBeer.brewersTips }}</p>
+            </div>
+          </div>
+          <div class="product-preview__info">
+            <h3 class="product-preview__info-title">Contributed by</h3>
+            <div class="product-preview__description">
+              <p>{{ oneBeer.contributedBy }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -96,13 +175,11 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import ProductInfo from "@/components/ProductInfo";
+// import ProductInfo from "@/components/ProductInfo";
 
 export default {
   name: "ProductPreview",
-  components: {
-    ProductInfo,
-  },
+  components: {},
   methods: {
     ...mapActions({
       getOneBeer: "allBeers/getOneBeer",
@@ -122,5 +199,198 @@ export default {
 <style lang="scss">
 .product-preview__container {
   @include default-container;
+}
+
+.product-preview__title {
+  @include main-description;
+  margin-bottom: 20px;
+  font-size: 64px;
+  color: $color-black;
+  text-align: center;
+
+  &-number {
+    font-weight: normal;
+    font-size: 54px;
+    color: $color-light-blue;
+  }
+
+  &-date {
+    margin-left: 20px;
+    font-weight: normal;
+    font-size: 48px;
+    color: $color-gray;
+  }
+}
+
+.product-preview__tagcontainer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
+  margin-bottom: 30px;
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: -15px;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 10px;
+    background-color: $color-black;
+  }
+
+  &::after {
+    top: unset;
+    bottom: -15px;
+  }
+}
+
+.product-preview__tag {
+  @include main-description;
+  font-size: 34px;
+  color: $color-black;
+}
+
+.product-preview__abv {
+  @include reset-list;
+  @include main-description;
+  display: flex;
+  color: $color-black;
+  font-size: 20px;
+  text-transform: uppercase;
+
+  li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: -4px;
+      content: "";
+      width: 4px;
+      height: 47px;
+      background-color: $color-black;
+    }
+  }
+}
+
+.product-preview__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-preview__infocontainer {
+  width: 30%;
+}
+
+.product-preview__info {
+  margin-bottom: 20px;
+}
+
+.product-preview__info-title {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.product-preview__description {
+  padding: 15px 20px;
+  font-size: 18px;
+  color: $color-dark-gray;
+  background-color: $color-light-gray;
+  border-top: 4px solid $color-black;
+  text-transform: uppercase;
+  text-align: center;
+
+  &--image {
+    padding: 0;
+  }
+}
+
+.product-preview__base {
+  @include reset-list;
+
+  li {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .product-preview__base-title {
+      color: $color-black;
+      font-weight: bold;
+    }
+
+    &::after {
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      content: "";
+      width: 100%;
+      height: 1px;
+      background-color: $color-black;
+    }
+  }
+
+  .product-preview__twist {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      text-align: left;
+    }
+
+    .product-preview__base-title {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    &::after {
+      width: 0;
+    }
+  }
+
+  &--food {
+    li {
+      color: $color-black;
+    }
+  }
+}
+
+.product-preview__category {
+  color: $color-black;
+  margin-bottom: 15px;
+}
+
+.product-preview__yeast {
+  position: relative;
+  margin-bottom: 20px;
+  color: $color-black;
+  text-align: center;
+
+  &::after {
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: $color-black;
+  }
+}
+
+.product-preview__picture {
+  width: 100%;
+  max-height: 800px;
+  padding: 20px;
+  background-image: url("@/assets/images/bg/ravenna.png");
+
+  img {
+    width: 55%;
+    max-height: 800px;
+  }
 }
 </style>
