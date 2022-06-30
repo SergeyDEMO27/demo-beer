@@ -1,5 +1,6 @@
 import axios from "axios";
 import beerParser from "@/parsers/beerParser";
+import oneBeerParser from "@/parsers/oneBeerParser";
 
 export default {
   state: () => ({
@@ -41,8 +42,7 @@ export default {
       const response = await axios.get(
         `https://api.punkapi.com/v2/beers/${beerId}`
       );
-      console.log(response.data[0]);
-      commit("setOneBeer", response.data[0]);
+      commit("setOneBeer", oneBeerParser(response.data));
     },
   },
   namespaced: true,
