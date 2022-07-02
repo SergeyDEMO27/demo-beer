@@ -13,11 +13,12 @@
         </li>
       </ul>
     </div>
+    <div id="observer" ref="observer" class="main-presentation__observer"></div>
   </section>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 import MainFilter from "@/components/MainFilter.vue";
 import PresentationItem from "@/components/PresentationItem.vue";
 
@@ -27,18 +28,10 @@ export default {
     MainFilter,
     PresentationItem,
   },
-  methods: {
-    ...mapActions({
-      getAllBeers: "allBeers/getAllBeers",
-    }),
-  },
   computed: {
     ...mapState({
       allBeers: (state) => state.allBeers.allBeers,
     }),
-  },
-  mounted() {
-    this.getAllBeers();
   },
 };
 </script>
@@ -57,5 +50,11 @@ export default {
 .main-presentation__item {
   width: 50%;
   min-height: 230px;
+}
+
+.main-presentation__observer {
+  width: 100%;
+  height: 1px;
+  background-color: transparent;
 }
 </style>

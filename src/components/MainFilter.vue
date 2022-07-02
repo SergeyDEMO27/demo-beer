@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 import _ from "lodash";
 import MainInput from "@/components/UI/MainInput.vue";
 import MainRange from "@/components/UI/MainRange.vue";
@@ -56,21 +56,23 @@ export default {
       abvValue: { title: "abv", abvMin: "", abvMax: "" },
       ibuValue: { title: "ibu", ibuMin: "", ibuMax: "" },
       ebcValue: { title: "ebc", ebcMin: "", ebcMax: "" },
-      page: 1,
-      perPage: 10,
+      observer: null,
     };
   },
   methods: {
     ...mapActions({
       getSearchBeer: "allBeers/getSearchBeer",
     }),
-    searchBeer: _.debounce(function () {
+    ...mapMutations({
+      clearBeers: "allBeers/clearBeers",
+      increasePage: "allBeers/increasePage",
+      resetPage: "allBeers/resetPage",
+    }),
+    searchBeer: _.debounce(function (isNewReq = true) {
       this.getSearchBeer({
         beerParams: {
           beer_name: this.searchNameValue,
           food: this.searchFoodValue,
-          page: this.page,
-          per_page: this.perPage,
           abv_gt: this.abvValue.abvMin,
           abv_lt: this.abvValue.abvMax,
           ibu_gt: this.ibuValue.ibuMin,
@@ -78,34 +80,57 @@ export default {
           ebc_gt: this.ebcValue.ebcMin,
           ebc_lt: this.ebcValue.ebcMax,
         },
+        isNewReq,
       });
-    }, 1000),
+    }, 0),
   },
   watch: {
     searchNameValue() {
-      this.searchBeer();
+      this.resetPage();
+      this.searchBeer(false);
     },
     searchFoodValue() {
-      this.searchBeer();
+      this.resetPage();
+      this.searchBeer(false);
     },
     abvValue: {
       handler() {
-        this.searchBeer();
+        this.resetPage();
+        this.searchBeer(false);
       },
       deep: true,
     },
     ibuValue: {
       handler() {
-        this.searchBeer();
+        this.resetPage();
+        this.searchBeer(false);
       },
       deep: true,
     },
     ebcValue: {
       handler() {
-        this.searchBeer();
+        this.resetPage();
+        this.searchBeer(false);
       },
       deep: true,
     },
+  },
+  mounted() {
+    const callback = (entries) => {
+      if (entries[0].isIntersecting) {
+        this.increasePage();
+        this.searchBeer();
+      }
+    };
+    this.observer = new IntersectionObserver(callback, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0,
+    });
+    this.observer.observe(document.querySelector("#observer"));
+  },
+  unmounted() {
+    this.observer.disconnect();
   },
 };
 </script>
