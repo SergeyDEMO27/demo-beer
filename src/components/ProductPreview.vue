@@ -85,18 +85,24 @@
               <h3 class="product-preview__info-title">METHOD/TIMINGS</h3>
               <div class="product-preview__description">
                 <ul class="product-preview__base">
-                  <li>
+                  <li
+                    class="product-preview__item--mash product-preview__item--padding"
+                  >
                     <span class="product-preview__base-title">MASH TEMP</span>
                     <span>{{ oneBeer.mashTemp }}℃</span>
                     <span>{{ oneBeer.mashDur }}min</span>
                   </li>
-                  <li>
+                  <li
+                    class="product-preview__item--fer product-preview__item--padding"
+                  >
                     <span class="product-preview__base-title"
                       >fermentation</span
                     >
                     <span>{{ oneBeer.fermentValue }}℃</span>
                   </li>
-                  <li class="product-preview__twist">
+                  <li
+                    class="product-preview__item--twist product-preview__item--padding"
+                  >
                     <span class="product-preview__base-title">Twist</span>
                     <span>{{ oneBeer.twist }}</span>
                   </li>
@@ -109,18 +115,34 @@
           <div class="product-preview__info">
             <h3 class="product-preview__info-title">INGREDIENTS</h3>
             <div class="product-preview__description">
-              <h3 class="product-preview__category">Malt</h3>
+              <h3
+                class="product-preview__category product-preview__category--icon product-preview__category--malt"
+              >
+                Malt
+              </h3>
               <ul class="product-preview__base">
-                <li v-for="item in oneBeer.malt" :key="item">
+                <li
+                  class="product-preview__item-ing"
+                  v-for="item in oneBeer.malt"
+                  :key="item"
+                >
                   <span class="product-preview__base-title">{{
                     item.name
                   }}</span>
                   <span>{{ item.amount.value }} {{ item.amount.unit }}</span>
                 </li>
               </ul>
-              <h3 class="product-preview__category">Hops</h3>
+              <h3
+                class="product-preview__category product-preview__category--icon product-preview__category--hops"
+              >
+                Hops
+              </h3>
               <ul class="product-preview__base">
-                <li v-for="item in oneBeer.hops" :key="item">
+                <li
+                  class="product-preview__item-ing"
+                  v-for="item in oneBeer.hops"
+                  :key="item"
+                >
                   <span class="product-preview__base-title">{{
                     item.name
                   }}</span>
@@ -129,7 +151,11 @@
                   <span>{{ item.attribute }}</span>
                 </li>
               </ul>
-              <h3 class="product-preview__category">Yeast</h3>
+              <h3
+                class="product-preview__category product-preview__category--icon product-preview__category--yeast"
+              >
+                Yeast
+              </h3>
               <p class="product-preview__yeast">{{ oneBeer.yeast }}</p>
             </div>
           </div>
@@ -143,6 +169,14 @@
               </ul>
             </div>
           </div>
+          <div class="product-preview__info">
+            <h3 class="product-preview__info-title">BREWER'S TIP</h3>
+            <div class="product-preview__description">
+              <p class="product-preview__base--tip">
+                {{ oneBeer.brewersTips }}
+              </p>
+            </div>
+          </div>
         </div>
         <div class="product-preview__infocontainer">
           <div class="product-preview__info">
@@ -153,12 +187,6 @@
               <div class="product-preview__picture">
                 <img :src="oneBeer.imageUrl" :alt="oneBeer.name" />
               </div>
-            </div>
-          </div>
-          <div class="product-preview__info">
-            <h3 class="product-preview__info-title">BREWER'S TIP</h3>
-            <div class="product-preview__description">
-              <p>{{ oneBeer.brewersTips }}</p>
             </div>
           </div>
           <div class="product-preview__info">
@@ -335,34 +363,139 @@ export default {
     }
   }
 
-  .product-preview__twist {
+  .product-preview__item-ing {
+    span {
+      width: 25%;
+
+      &:first-child {
+        text-align: left;
+      }
+
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+
+  .product-preview__item--twist {
     display: flex;
     flex-direction: column;
 
     span {
-      text-align: left;
+      text-align: center;
     }
 
     .product-preview__base-title {
       margin-bottom: 15px;
-      text-align: center;
+      text-align: left;
     }
 
-    &::after {
-      width: 0;
+    &::before {
+      position: absolute;
+      top: -5px;
+      left: 0;
+      content: "";
+      width: 45px;
+      height: 45px;
+      background-image: url("@/assets/images/icons/icon-twist.png");
+      background-size: cover;
     }
   }
 
-  &--food {
+  &--food,
+  &--tip {
+    position: relative;
+    padding-top: 50px;
+
     li {
       color: $color-black;
+    }
+
+    &::after {
+      position: absolute;
+      top: -5px;
+      left: 0;
+      content: "";
+      width: 45px;
+      height: 45px;
+      background-image: url("@/assets/images/icons/icon-food-pairing.png");
+      background-size: cover;
+    }
+  }
+
+  &--tip {
+    &::after {
+      background-image: url("@/assets/images/icons/icon-tip.png");
+    }
+  }
+}
+
+.product-preview__item {
+  position: relative;
+
+  &--padding {
+    padding-top: 50px;
+
+    &::before {
+      position: absolute;
+      top: -5px;
+      left: 0;
+      content: "";
+      width: 45px;
+      height: 45px;
+      background-size: cover;
+    }
+  }
+
+  &--mash {
+    &::before {
+      background-image: url("@/assets/images/icons/icon-mash.png");
+    }
+  }
+
+  &--fer {
+    &::before {
+      background-image: url("@/assets/images/icons/icon-fermetation.png");
     }
   }
 }
 
 .product-preview__category {
   color: $color-black;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+
+  &--icon {
+    position: relative;
+    padding-top: 10px;
+
+    &::before {
+      position: absolute;
+      top: -1px;
+      left: 95px;
+      content: "";
+      width: 45px;
+      height: 45px;
+      background-size: cover;
+    }
+  }
+
+  &--malt {
+    &::before {
+      background-image: url("@/assets/images/icons/icon-malt.png");
+    }
+  }
+
+  &--hops {
+    &::before {
+      background-image: url("@/assets/images/icons/icon-hops.png");
+    }
+  }
+
+  &--yeast {
+    &::before {
+      background-image: url("@/assets/images/icons/icon-yeast.png");
+    }
+  }
 }
 
 .product-preview__yeast {
