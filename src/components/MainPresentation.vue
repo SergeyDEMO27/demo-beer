@@ -1,17 +1,24 @@
 <template>
   <section class="main-presentation">
     <div class="main-presentation__container">
-      <MainFilter />
       <h2 class="main-presentation__title">RECIPES</h2>
-      <ul class="main-presentation__list">
-        <li
-          class="main-presentation__item"
-          v-for="item in allBeers"
-          :key="item.id"
-        >
-          <PresentationItem :presentationItem="item" />
-        </li>
-      </ul>
+      <div class="main-presentation__wrapper">
+        <MainFilter class="main-presentation__filter" />
+        <ul class="main-presentation__list">
+          <li
+            class="main-presentation__item"
+            :class="{
+              'main-presentation__item--even':
+                (index - index / 2) % 2 === 0 ||
+                (index - 1 - (index - 1) / 2) % 2 === 0,
+            }"
+            v-for="(item, index) in allBeers"
+            :key="item.id"
+          >
+            <PresentationItem :presentationItem="item" />
+          </li>
+        </ul>
+      </div>
     </div>
     <div id="observer" ref="observer" class="main-presentation__observer"></div>
   </section>
@@ -41,15 +48,31 @@ export default {
   @include default-container;
 }
 
+.main-presentation__wrapper {
+  display: flex;
+}
+
+.main-presentation__filter {
+  position: sticky;
+  top: 0;
+  width: 20%;
+  max-height: 420px;
+}
+
 .main-presentation__list {
   @include reset-list;
   display: flex;
   flex-wrap: wrap;
+  width: 80%;
 }
 
 .main-presentation__item {
   width: 50%;
   min-height: 230px;
+
+  &--even {
+    background-color: $color-light-gray;
+  }
 }
 
 .main-presentation__observer {

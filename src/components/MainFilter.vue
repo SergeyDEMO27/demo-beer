@@ -1,38 +1,65 @@
 <template>
   <div class="main-filter">
-    <h2>FILTER OPTIONS</h2>
-    <form action="">
+    <h2 class="main-filter__title">FILTER OPTIONS</h2>
+    <form class="main-filter__form" action="">
       <MainInput
-        :title="'beer'"
+        class="main-filter__input"
+        :title="'name'"
         :inputType="'search'"
         v-model:inputValue="searchNameValue"
+        :isInputActive="isInputActive.searchName"
+        @inputActive="() => (isInputActive.searchName = true)"
+        @inputNotActive="() => (isInputActive.searchName = false)"
       />
       <MainInput
+        class="main-filter__input"
         :title="'food'"
         :inputType="'search'"
         v-model:inputValue="searchFoodValue"
+        :isInputActive="isInputActive.searchFood"
+        @inputActive="() => (isInputActive.searchFood = true)"
+        @inputNotActive="() => (isInputActive.searchFood = false)"
       />
       <MainRange
+        class="main-filter__input"
         :title="abvValue.title"
         :minValue="abvValue.abvMin"
         :maxValue="abvValue.abvMax"
         @updateMinValue="(value) => (abvValue.abvMin = value)"
         @updateMaxValue="(value) => (abvValue.abvMax = value)"
+        :isInputActive="isInputActive.abv"
+        @minInputActive="() => (isInputActive.abv.min = true)"
+        @maxInputActive="() => (isInputActive.abv.max = true)"
+        @minInputNotActive="() => (isInputActive.abv.min = false)"
+        @maxInputNotActive="() => (isInputActive.abv.max = false)"
       />
       <MainRange
+        class="main-filter__input"
         :title="ibuValue.title"
         :minValue="ibuValue.ibuMin"
         :maxValue="ibuValue.ibuMax"
+        :isInputActive="isInputActive.ibu"
         @updateMinValue="(value) => (ibuValue.ibuMin = value)"
         @updateMaxValue="(value) => (ibuValue.ibuMax = value)"
+        @minInputActive="() => (isInputActive.ibu.min = true)"
+        @maxInputActive="() => (isInputActive.ibu.max = true)"
+        @minInputNotActive="() => (isInputActive.ibu.min = false)"
+        @maxInputNotActive="() => (isInputActive.ibu.max = false)"
       />
       <MainRange
+        class="main-filter__input"
         :title="ebcValue.title"
         :minValue="ebcValue.ebcMin"
         :maxValue="ebcValue.ebcMax"
+        :isInputActive="isInputActive.ebc"
         @updateMinValue="(value) => (ebcValue.ebcMin = value)"
         @updateMaxValue="(value) => (ebcValue.ebcMax = value)"
+        @minInputActive="() => (isInputActive.ebc.min = true)"
+        @maxInputActive="() => (isInputActive.ebc.max = true)"
+        @minInputNotActive="() => (isInputActive.ebc.min = false)"
+        @maxInputNotActive="() => (isInputActive.ebc.max = false)"
       />
+      <!-- <button onClick="clearFilter" type="button">Reset</button> -->
     </form>
   </div>
 </template>
@@ -57,6 +84,13 @@ export default {
       ibuValue: { title: "ibu", ibuMin: "", ibuMax: "" },
       ebcValue: { title: "ebc", ebcMin: "", ebcMax: "" },
       observer: null,
+      isInputActive: {
+        searchName: false,
+        searchFood: false,
+        abv: { min: false, max: false },
+        ibu: { min: false, max: false },
+        ebc: { min: false, max: false },
+      },
     };
   },
   methods: {
@@ -83,6 +117,25 @@ export default {
         isNewReq,
       });
     }, 0),
+    // clearFilter() {
+    //   console.log("Hello");
+    //   this.searchNameValue = "";
+    //   this.searchFoodValue = "";
+    //   this.abvValue.abvMin = "";
+    //   this.abvValue.abvMax = "";
+    //   this.ibuValue.ibuMin = "";
+    //   this.ibuValue.ibuMax = "";
+    //   this.ebcValue.ebcMin = "";
+    //   this.ebcValue.ebcMax = "";
+    //   this.isInputActive.searchName = false;
+    //   this.isInputActive.searchFood = false;
+    //   this.isInputActive.abv.min = false;
+    //   this.isInputActive.abv.max = false;
+    //   this.isInputActive.ibu.min = false;
+    //   this.isInputActive.ibu.max = false;
+    //   this.isInputActive.ebc.min = false;
+    //   this.isInputActive.ebc.max = false;
+    // },
   },
   watch: {
     searchNameValue() {
@@ -135,4 +188,23 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.main-filter {
+  padding: 10px;
+  background-color: $color-white;
+}
+
+.main-filter__title {
+  margin-bottom: 30px;
+}
+
+.main-filter__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-filter__input {
+  height: 32px;
+  margin-bottom: 30px;
+}
+</style>

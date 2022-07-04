@@ -16,8 +16,12 @@
         {{ presentationItem.name }}
       </h3>
       <p class="presentation-item__date">
-        <span>{{ presentationItem.tagline }}</span>
-        {{ presentationItem.first_brewed }}
+        <span class="presentation-item__date-tag">{{
+          presentationItem.tagline
+        }}</span>
+        <span class="presentation-item__date-time">{{
+          presentationItem.first_brewed
+        }}</span>
       </p>
       <p class="presentation-item__description">
         <span class="presentation-item__description-el"
@@ -46,6 +50,8 @@ export default {
   display: flex;
   width: 100%;
   height: 100%;
+  color: $color-black;
+  text-decoration: none;
 }
 
 .presentation-item__picture {
@@ -80,7 +86,7 @@ export default {
 
 .presentation-item__title {
   margin-bottom: 15px;
-  font-size: 38px;
+  font-size: 30px;
   font-weight: normal;
   text-transform: uppercase;
 
@@ -91,16 +97,21 @@ export default {
 
 .presentation-item__date {
   margin-bottom: 15px;
-  font-size: 24px;
-  span {
+  font-size: 22px;
+
+  &-tag {
     position: relative;
     margin-right: 30px;
     text-transform: uppercase;
+  }
 
-    &::after {
+  &-time {
+    position: relative;
+
+    &::before {
       position: absolute;
       top: 4px;
-      right: -16px;
+      left: -16px;
       content: "";
       width: 2px;
       height: 20px;
