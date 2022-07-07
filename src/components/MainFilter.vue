@@ -190,12 +190,13 @@ export default {
 
 <style lang="scss">
 .main-filter {
-  padding: 10px;
+  padding: 25px;
   background-color: $color-white;
+  text-align: center;
 }
 
 .main-filter__title {
-  margin-bottom: 30px;
+  margin-bottom: 45px;
 }
 
 .main-filter__form {
@@ -205,6 +206,6 @@ export default {
 
 .main-filter__input {
   height: 32px;
-  margin-bottom: 30px;
+  margin-bottom: 43px;
 }
 </style>

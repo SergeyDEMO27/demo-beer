@@ -53,19 +53,32 @@ export default {
 
 <style lang="scss">
 .main-range {
+  position: relative;
   text-align: center;
 }
 
 .main-range__title {
+  @include center-element;
+  position: absolute;
+  top: -16px;
   font-size: 22px;
   font-weight: bold;
   text-transform: uppercase;
 }
 
 .main-range__container {
+  position: relative;
   display: flex;
   justify-content: space-between;
   height: 100%;
+
+  &::after {
+    @include center-element;
+    content: "";
+    width: 7px;
+    height: 2px;
+    background-color: $color-black;
+  }
 }
 
 .main-range__input {

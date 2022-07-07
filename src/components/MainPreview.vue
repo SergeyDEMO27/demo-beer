@@ -6,7 +6,7 @@
         :class="`main-preview__item--${n}`"
         :pathName="`beer${n}`"
         :pathId="n"
-        v-for="n in 12"
+        v-for="n in 19"
         :key="n"
       />
       <!-- <div id="animate0" class="main-preview__item main-preview__item--0"></div> -->
@@ -15,7 +15,7 @@
       <div class="main-preview__item main-preview__item--3"></div>
       <div class="main-preview__item main-preview__item--4"></div> -->
     </div>
-    <PreviewItem
+    <!-- <PreviewItem
       id="animateFish1"
       :pathName="'fish1'"
       class="main-preview__fish"
@@ -24,23 +24,26 @@
       id="animateFish2"
       :pathName="'fish2'"
       class="main-preview__fish main-preview__fish--2"
-    />
+    /> -->
     <!-- <div class="bubble x1"></div> -->
-    <MainBubbles />
+    <!-- <MainBubbles /> -->
+    <SecondaryBubbles />
   </div>
 </template>
 
 <script>
-import PreviewItem from "@/components/PreviewItem.vue";
+// import PreviewItem from "@/components/PreviewItem.vue";
 import PreviewElement from "@/components/PreviewElement.vue";
-import MainBubbles from "@/components/MainBubbles.vue";
+// import MainBubbles from "@/components/MainBubbles.vue";
+import SecondaryBubbles from "@/components/SecondaryBubbles.vue";
 
 export default {
   name: "MainPreview",
   components: {
-    PreviewItem,
+    // PreviewItem,
     PreviewElement,
-    MainBubbles,
+    // MainBubbles,
+    SecondaryBubbles,
   },
   mounted() {
     document.querySelector("#animateFish1").animate(
@@ -81,7 +84,9 @@ export default {
   position: relative;
   width: 100%;
   height: 100vh;
-  background-color: lightgreen;
+  background: linear-gradient(270deg, #4cdfe1, #f9dd40);
+  background-size: 400% 400%;
+  animation: backGradient 19s ease infinite;
   overflow: hidden;
 }
 
@@ -112,69 +117,142 @@ export default {
   // animation: float0 random(6) + 6 + s infinite;
 
   &--1 {
+    display: none;
     top: 20vh;
     left: unset;
     right: 5vw;
   }
 
   &--2 {
-    top: -2vh;
+    top: 69vh;
     left: unset;
-    right: 28vw;
+    right: -6vw;
+    width: 70px;
+    height: 125px;
   }
 
   &--3 {
-    top: 50vh;
-    left: 7vw;
+    top: 10vh;
+    left: -8vw;
+    width: 85px;
+    height: 175px;
   }
 
   &--4 {
-    top: 85vh;
-    left: 50vw;
+    top: 75vh;
+    left: -4vw;
+
+    width: 67px;
+    height: 160px;
   }
 
   &--5 {
-    top: 65vh;
-    left: 40vw;
+    top: 38vh;
+    left: 2vw;
+    width: 70px;
+    height: 125px;
   }
 
   &--6 {
+    display: none;
     top: 72vh;
     left: 0;
   }
 
   &--7 {
+    display: none;
     top: 0;
     left: 17vw;
     width: 55px;
   }
 
   &--8 {
+    display: none;
     top: 85vh;
     left: 26vw;
   }
 
   &--9 {
-    top: 70vh;
-    left: 15vw;
+    top: 5vh;
+    left: unset;
+    right: 0;
+    width: 65px;
+    height: 145px;
   }
 
   &--10 {
+    display: none;
     top: 50vh;
     left: 60vw;
     width: 80px;
   }
 
   &--11 {
+    display: none;
     top: 15vh;
     left: 0vw;
     width: 70px;
   }
 
   &--12 {
+    display: none;
     top: 10vh;
     left: 42vw;
     width: 80px;
+  }
+
+  &--13 {
+    top: 50vh;
+    left: unset;
+    right: 5vw;
+    width: 65px;
+    height: 145px;
+  }
+
+  &--14 {
+    top: 65vh;
+    left: unset;
+    right: 18vw;
+    width: 85px;
+    height: 65px;
+  }
+
+  &--15 {
+    top: 80vh;
+    left: unset;
+    right: 30vw;
+    width: 52px;
+    height: 80px;
+  }
+
+  &--16 {
+    top: 3vh;
+    left: unset;
+    right: 32vw;
+    width: 60px;
+    height: 100px;
+  }
+
+  &--17 {
+    top: 9vh;
+    left: unset;
+    right: 14vw;
+    width: 90px;
+    height: 47px;
+  }
+
+  &--18 {
+    top: 9vh;
+    left: 10vw;
+    width: 90px;
+    height: 85px;
+  }
+
+  &--19 {
+    top: 75vh;
+    left: 15vw;
+    width: 52px;
+    height: 35px;
   }
 }
 
@@ -216,4 +294,16 @@ export default {
 //     (random(70) + 30) / 100
 //   );
 // }
+
+@keyframes backGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 </style>

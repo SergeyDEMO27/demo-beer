@@ -56,7 +56,8 @@ export default {
   position: sticky;
   top: 0;
   width: 20%;
-  max-height: 420px;
+  max-height: 500px;
+  background-color: #f1f1f2;
 }
 
 .main-presentation__list {

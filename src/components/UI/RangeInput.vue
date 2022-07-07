@@ -35,7 +35,7 @@ export default {
 
   &--active {
     .range-input__label {
-      bottom: 30px;
+      bottom: 35px;
     }
   }
 }
@@ -43,10 +43,10 @@ export default {
 .range-input__label {
   @include default-transition;
   position: absolute;
-  bottom: 0;
+  bottom: 35px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 20px;
+  font-size: 16px;
   text-transform: uppercase;
 }
 
@@ -54,11 +54,14 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  padding-left: 9px;
   font-size: 22px;
-  border: none;
-  border-bottom: 2px solid $color-black;
-  background-color: transparent;
-  z-index: 2;
+  /* border: none; */
+  /* border-bottom: 2px solid #000000; */
+  border: 3px solid $color-black;
+  background-color: $color-white;
+
+  border-radius: 8px;
 
   &:focus {
     outline: none;

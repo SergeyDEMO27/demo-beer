@@ -22,7 +22,7 @@ export default {
         { transform: "translatey(0px)" },
         {
           transform: `translatey(${Math.round(
-            Math.random() * (120 - 40) + 40
+            Math.random() * (60 - 40) + 40
           )}px) translatex(5px)`,
         },
         { transform: "translatey(0px)" },
@@ -38,8 +38,8 @@ export default {
 
 <style lang="scss">
 .preview-element {
-  width: 130px;
-  height: 60px;
+  width: 157px;
+  height: 175px;
   background-repeat: no-repeat;
   background-size: contain;
 }
