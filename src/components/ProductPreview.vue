@@ -9,17 +9,19 @@
         }}</span>
       </h1>
       <div class="product-preview__tagcontainer">
-        <p class="product-preview__tag">{{ oneBeer.tagline }}</p>
+        <p class="product-preview__tag" v-if="oneBeer.tagline">
+          {{ oneBeer.tagline }}
+        </p>
         <ul class="product-preview__abv">
-          <li>
+          <li v-if="oneBeer.abv">
             <span>abv</span>
             <span>{{ oneBeer.abv }}%</span>
           </li>
-          <li>
+          <li v-if="oneBeer.ibu">
             <span>ibu</span>
             <span>{{ oneBeer.ibu }}</span>
           </li>
-          <li>
+          <li v-if="oneBeer.targetOg">
             <span>og</span>
             <span>{{ oneBeer.targetOg }}</span>
           </li>
@@ -27,7 +29,7 @@
       </div>
       <div class="product-preview__wrapper">
         <div class="product-preview__infocontainer">
-          <div class="product-preview__info">
+          <div class="product-preview__info" v-if="oneBeer.description">
             <h3 class="product-preview__info-title">The beer is</h3>
             <div class="product-preview__description">
               <p class="product-preview__description-beer">
@@ -39,39 +41,39 @@
             <h3 class="product-preview__info-title">Basics</h3>
             <div class="product-preview__description">
               <ul class="product-preview__base">
-                <li>
+                <li v-if="oneBeer.volumeValue">
                   <span class="product-preview__base-title">Volume</span>
                   <span>{{ oneBeer.volumeValue }}L</span>
                 </li>
-                <li>
+                <li v-if="oneBeer.boilValue">
                   <span class="product-preview__base-title">Boil volume</span>
                   <span>{{ oneBeer.boilValue }}L</span>
                 </li>
-                <li>
+                <li v-if="oneBeer.abv">
                   <span class="product-preview__base-title">Abv</span>
                   <span>{{ oneBeer.abv }}%</span>
                 </li>
-                <li>
+                <li v-if="oneBeer.targetFg">
                   <span class="product-preview__base-title">Target fg</span>
                   <span>{{ oneBeer.targetFg }}</span>
                 </li>
-                <li>
+                <li v-if="oneBeer.targetOg">
                   <span class="product-preview__base-title">Target og</span>
                   <span>{{ oneBeer.targetOg }}</span>
                 </li>
-                <li>
+                <li v-if="oneBeer.ebc">
                   <span class="product-preview__base-title">Ebc</span>
                   <span>{{ oneBeer.ebc }}</span>
                 </li>
-                <li>
+                <li v-if="oneBeer.srm">
                   <span class="product-preview__base-title">Srm</span>
                   <span>{{ oneBeer.srm }}</span>
                 </li>
-                <li>
+                <li v-if="oneBeer.ph">
                   <span class="product-preview__base-title">Ph</span>
                   <span>{{ oneBeer.ph }}</span>
                 </li>
-                <li>
+                <li v-if="oneBeer.attenuationLevel">
                   <span class="product-preview__base-title"
                     >Attenuation level</span
                   >
@@ -82,28 +84,47 @@
           </div>
           <div>
             <div class="product-preview__info">
-              <h3 class="product-preview__info-title">METHOD/TIMINGS</h3>
+              <h3 class="product-preview__info-title">Method/Timings</h3>
               <div class="product-preview__description">
                 <ul class="product-preview__base">
                   <li
                     class="product-preview__item--mash product-preview__item--padding"
                   >
-                    <span class="product-preview__base-title">MASH TEMP</span>
-                    <span>{{ oneBeer.mashTemp }}℃</span>
-                    <span>{{ oneBeer.mashDur }}min</span>
+                    <h3
+                      class="product-preview__category product-preview__category--icon product-preview__category--mash"
+                    >
+                      Mash temp
+                    </h3>
+                    <p>
+                      <span>{{ oneBeer.mashTempF }}℉</span>
+                      <span>{{ oneBeer.mashTemp }}℃</span>
+                      <span>{{ oneBeer.mashDur }}min</span>
+                    </p>
                   </li>
                   <li
                     class="product-preview__item--fer product-preview__item--padding"
                   >
-                    <span class="product-preview__base-title"
-                      >fermentation</span
+                    <h3
+                      class="product-preview__category product-preview__category--icon product-preview__category--ferm"
                     >
-                    <span>{{ oneBeer.fermentValue }}℃</span>
+                      Fermentation
+                    </h3>
+                    <p>
+                      <span>{{ oneBeer.fermentValueF }}℉</span>
+                      <span>{{ oneBeer.fermentValue }}℃</span>
+                      <span></span>
+                    </p>
                   </li>
                   <li
                     class="product-preview__item--twist product-preview__item--padding"
+                    v-if="oneBeer.twist"
                   >
-                    <span class="product-preview__base-title">Twist</span>
+                    <h3
+                      class="product-preview__category product-preview__category--icon product-preview__category--twist"
+                    >
+                      Twist
+                    </h3>
+
                     <span>{{ oneBeer.twist }}</span>
                   </li>
                 </ul>
@@ -117,10 +138,11 @@
             <div class="product-preview__description">
               <h3
                 class="product-preview__category product-preview__category--icon product-preview__category--malt"
+                v-if="oneBeer.malt"
               >
                 Malt
               </h3>
-              <ul class="product-preview__base">
+              <ul class="product-preview__base" v-if="oneBeer.malt">
                 <li
                   class="product-preview__item-ing"
                   v-for="item in oneBeer.malt"
@@ -129,15 +151,16 @@
                   <span class="product-preview__base-title">{{
                     item.name
                   }}</span>
-                  <span>{{ item.amount.value }} {{ item.amount.unit }}</span>
+                  <span>{{ item.amount.value }} kg</span>
                 </li>
               </ul>
               <h3
                 class="product-preview__category product-preview__category--icon product-preview__category--hops"
+                v-if="oneBeer.hops"
               >
                 Hops
               </h3>
-              <ul class="product-preview__base">
+              <ul class="product-preview__base" v-if="oneBeer.hops">
                 <li
                   class="product-preview__item-ing"
                   v-for="item in oneBeer.hops"
@@ -146,20 +169,23 @@
                   <span class="product-preview__base-title">{{
                     item.name
                   }}</span>
-                  <span>{{ item.amount.value }} {{ item.amount.unit }}</span>
+                  <span>{{ item.amount.value }} G</span>
                   <span>{{ item.add }}</span>
                   <span>{{ item.attribute }}</span>
                 </li>
               </ul>
               <h3
                 class="product-preview__category product-preview__category--icon product-preview__category--yeast"
+                v-if="oneBeer.yeast"
               >
                 Yeast
               </h3>
-              <p class="product-preview__yeast">{{ oneBeer.yeast }}</p>
+              <p class="product-preview__yeast" v-if="oneBeer.yeast">
+                {{ oneBeer.yeast }}
+              </p>
             </div>
           </div>
-          <div class="product-preview__info">
+          <div class="product-preview__info" v-if="oneBeer.foodPairing">
             <h3 class="product-preview__info-title">Food</h3>
             <div class="product-preview__description">
               <ul class="product-preview__base product-preview__base--food">
@@ -169,7 +195,7 @@
               </ul>
             </div>
           </div>
-          <div class="product-preview__info">
+          <div class="product-preview__info" v-if="oneBeer.brewersTips">
             <h3 class="product-preview__info-title">BREWER'S TIP</h3>
             <div class="product-preview__description">
               <p class="product-preview__base--tip">
@@ -189,9 +215,11 @@
               </div>
             </div>
           </div>
-          <div class="product-preview__info">
+          <div class="product-preview__info" v-if="oneBeer.contributedBy">
             <h3 class="product-preview__info-title">Contributed by</h3>
-            <div class="product-preview__description">
+            <div
+              class="product-preview__description product-preview__description-contr"
+            >
               <p>{{ oneBeer.contributedBy }}</p>
             </div>
           </div>
@@ -331,7 +359,12 @@ export default {
   background-color: $color-light-gray;
   border-top: 4px solid $color-black;
   text-transform: uppercase;
-  text-align: center;
+  text-align: left;
+
+  &-beer,
+  &-contr {
+    text-align: center;
+  }
 
   &--image {
     padding: 0;
@@ -341,31 +374,30 @@ export default {
 .product-preview__base {
   @include reset-list;
 
-  li {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+  .product-preview__item--padding {
+    display: block;
 
-    .product-preview__base-title {
-      color: $color-black;
-      font-weight: bold;
-    }
+    p {
+      display: flex;
+      justify-content: space-between;
 
-    &::after {
-      position: absolute;
-      left: 0;
-      bottom: -10px;
-      content: "";
-      width: 100%;
-      height: 1px;
-      background-color: $color-black;
+      span {
+        width: 33%;
+
+        &:nth-child(2) {
+          text-align: center;
+        }
+
+        &:last-child {
+          text-align: right;
+        }
+      }
     }
   }
 
   .product-preview__item-ing {
     span {
-      width: 25%;
+      width: 20%;
 
       &:first-child {
         text-align: left;
@@ -377,28 +409,28 @@ export default {
     }
   }
 
-  .product-preview__item--twist {
+  li {
+    position: relative;
     display: flex;
-    flex-direction: column;
-
-    span {
-      text-align: center;
-    }
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
 
     .product-preview__base-title {
-      margin-bottom: 15px;
+      width: 40%;
+      color: $color-black;
+      font-weight: bold;
       text-align: left;
     }
 
-    &::before {
+    &::after {
       position: absolute;
-      top: -5px;
       left: 0;
+      bottom: -10px;
       content: "";
-      width: 45px;
-      height: 45px;
-      background-image: url("@/assets/images/icons/icon-twist.png");
-      background-size: cover;
+      width: 100%;
+      height: 1px;
+      background-color: $color-black;
     }
   }
 
@@ -424,6 +456,8 @@ export default {
   }
 
   &--tip {
+    text-align: center;
+
     &::after {
       background-image: url("@/assets/images/icons/icon-tip.png");
     }
@@ -433,36 +467,15 @@ export default {
 .product-preview__item {
   position: relative;
 
-  &--padding {
-    padding-top: 50px;
-
-    &::before {
-      position: absolute;
-      top: -5px;
-      left: 0;
-      content: "";
-      width: 45px;
-      height: 45px;
-      background-size: cover;
-    }
-  }
-
-  &--mash {
-    &::before {
-      background-image: url("@/assets/images/icons/icon-mash.png");
-    }
-  }
-
-  &--fer {
-    &::before {
-      background-image: url("@/assets/images/icons/icon-fermetation.png");
-    }
+  &--twist {
+    text-align: center;
   }
 }
 
 .product-preview__category {
   color: $color-black;
   margin-bottom: 20px;
+  margin-left: 55px;
 
   &--icon {
     position: relative;
@@ -471,11 +484,36 @@ export default {
     &::before {
       position: absolute;
       top: -1px;
-      left: 95px;
+      left: -55px;
       content: "";
       width: 45px;
       height: 45px;
       background-size: cover;
+    }
+  }
+
+  &--mash {
+    margin-bottom: 20px;
+
+    &::before {
+      background-image: url("@/assets/images/icons/icon-mash.png");
+    }
+  }
+
+  &--ferm {
+    margin-bottom: 20px;
+
+    &::before {
+      background-image: url("@/assets/images/icons/icon-fermetation.png");
+    }
+  }
+
+  &--twist {
+    margin-bottom: 20px;
+    text-align: left;
+
+    &::before {
+      background-image: url("@/assets/images/icons/icon-twist.png");
     }
   }
 
@@ -515,11 +553,18 @@ export default {
   }
 }
 
+.product-preview__base--food {
+  li {
+    text-align: left;
+  }
+}
+
 .product-preview__picture {
   width: 100%;
   max-height: 800px;
   padding: 20px;
   background-image: url("@/assets/images/bg/ravenna.png");
+  text-align: center;
 
   img {
     width: 55%;
