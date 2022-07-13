@@ -38,15 +38,26 @@ export default {
 }
 
 .main-options__item {
+  @include default-transition;
   padding: 5px;
   font-size: 24px;
+  border: 2px solid #d9d9db;
   background-color: $color-light-gray;
-  border: 1px solid $color-black;
+  box-shadow: 4px 4px 8px 0px rgb(34 60 80 / 20%);
   text-transform: uppercase;
   cursor: pointer;
 
+  &:hover {
+    transform: scale(1.1);
+  }
+
   &--active {
-    background-color: $color-light-blue;
+    color: $color-light-blue;
+    cursor: default;
+
+    &:hover {
+      transform: scale(1);
+    }
   }
 }
 

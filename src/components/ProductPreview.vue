@@ -5,7 +5,7 @@
         <span class="product-preview__title-number">#{{ oneBeer.id }}</span>
         {{ oneBeer.name }}
         <span class="product-preview__title-date">{{
-          oneBeer.firstBrewed
+          oneBeer.first_brewed
         }}</span>
       </h1>
       <div class="product-preview__tagcontainer">
@@ -21,9 +21,9 @@
             <span>ibu</span>
             <span>{{ oneBeer.ibu }}</span>
           </li>
-          <li v-if="oneBeer.targetOg">
+          <li v-if="oneBeer.target_og">
             <span>og</span>
-            <span>{{ oneBeer.targetOg }}</span>
+            <span>{{ oneBeer.target_og }}</span>
           </li>
         </ul>
       </div>
@@ -211,7 +211,7 @@
               class="product-preview__description product-preview__description--image"
             >
               <div class="product-preview__picture">
-                <img :src="oneBeer.imageUrl" :alt="oneBeer.name" />
+                <img :src="oneBeer.image_url" :alt="oneBeer.name" />
               </div>
             </div>
           </div>

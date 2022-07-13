@@ -2,6 +2,7 @@
   <router-link
     :to="`/product/${presentationItem.id}`"
     class="presentation-item"
+    :class="{ 'presentation-item--vertical': vertical }"
   >
     <div class="presentation-item__picture">
       <img
@@ -41,6 +42,7 @@ export default {
   name: "PresentationItem",
   props: {
     presentationItem: Object,
+    vertical: Boolean,
   },
 };
 </script>
@@ -52,6 +54,15 @@ export default {
   height: 100%;
   color: $color-black;
   text-decoration: none;
+
+  &--vertical {
+    flex-direction: column;
+    align-items: center;
+
+    .presentation-item__container {
+      padding-top: 10px;
+    }
+  }
 }
 
 .presentation-item__picture {
@@ -60,15 +71,6 @@ export default {
   height: 100%;
   margin-right: 10px;
   background-image: url("@/assets/images/bg/ravenna.png");
-  //   background-color: #f1f1f2;
-  //   opacity: 1;
-  //   background-image: linear-gradient(#fff 0.8px, transparent 0.8px),
-  //     linear-gradient(90deg, #fff 0.8px, transparent 0.8px),
-  //     linear-gradient(#fff 0.4px, transparent 0.4px),
-  //     linear-gradient(90deg, #fff 0.4px, #f1f1f2 0.4px);
-  //   background-size: 20px 20px, 20px 20px, 4px 4px, 4px 4px;
-  //   background-position: -0.8px -0.8px, -0.8px -0.8px, -0.4px -0.4px,
-  //     -0.4px -0.4px;
 }
 
 .presentation-item__image {
