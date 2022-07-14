@@ -56,15 +56,26 @@ export default {
   height: 100%;
   padding-left: 9px;
   font-size: 22px;
-  /* border: none; */
-  /* border-bottom: 2px solid #000000; */
-  border: 3px solid $color-black;
+  border: 2px solid #d9d9db;
+  box-shadow: 4px 4px 8px 0px rgb(34 60 80 / 20%);
   background-color: $color-white;
 
   border-radius: 8px;
 
   &:focus {
     outline: none;
+  }
+}
+
+@media (min-width: $viewport--md) and (max-width: $viewport--lg) {
+  .range-input__label {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .range-input__label {
+    @include visually-hidden;
   }
 }
 </style>

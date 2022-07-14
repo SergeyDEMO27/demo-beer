@@ -3,13 +3,7 @@
     class="main-slider"
     :class="{ 'main-slider--reverse': direction === 'rtl' }"
   >
-    <Carousel
-      :autoplay="3500"
-      :transition="1500"
-      :dir="direction"
-      :items-to-show="5"
-      :wrap-around="true"
-    >
+    <Carousel :settings="settings" :breakpoints="breakpoints" :dir="direction">
       <Slide v-for="item in items" :key="item.name">
         <router-link
           class="carousel__item main-slider__item"
@@ -24,7 +18,7 @@
           </div>
           <div class="main-slider__info">
             <h3 class="main-slider__title">{{ item.name }}</h3>
-            <p>{{ item.first_brewed }}</p>
+            <p class="main-slider__date">{{ item.first_brewed }}</p>
           </div>
         </router-link>
       </Slide>
@@ -55,11 +49,47 @@ export default {
     direction: String,
   },
   components: { Carousel, Navigation, Slide },
+  data() {
+    return {
+      settings: {
+        autoplay: "3500",
+        transition: "1500",
+        itemsToShow: 5,
+        snapAlign: "center",
+        wrapAround: "true",
+      },
+      breakpoints: {
+        320: {
+          itemsToShow: 1,
+          snapAlign: "center",
+        },
+        375: {
+          itemsToShow: 2,
+          snapAlign: "center",
+        },
+        500: {
+          itemsToShow: 3,
+          snapAlign: "center",
+        },
+        768: {
+          itemsToShow: 4,
+          snapAlign: "center",
+        },
+        1024: {
+          itemsToShow: 5,
+          snapAlign: "center",
+        },
+      },
+    };
+  },
 };
 </script>
 
 <style lang="scss">
 .main-slider {
+  padding-right: 20px;
+  padding-left: 20px;
+
   .carousel__viewport {
     padding-top: 11px;
     padding-bottom: 13px;
@@ -98,7 +128,7 @@ export default {
   .carousel__next {
     width: 50px;
     border-radius: 0;
-    border: 1px solid #d9d9db;
+    border: 2px solid #d9d9db;
     background-color: #dfdfe0;
     transition: 0.2s ease-in-out;
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
@@ -204,6 +234,7 @@ export default {
 }
 
 .main-slider__picture {
+  position: relative;
   width: 100%;
   max-height: 220px;
   margin-bottom: 7px;
@@ -211,16 +242,29 @@ export default {
   padding-bottom: 10px;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
-  background-image: url("@/assets/images/bg/ravenna.png");
-  background-color: $color-light-gray;
+  background-image: url("@/assets/images/bg/bg-brick-gray.jpg");
+  background-color: #e5d0ed;
   background-size: cover;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: #e5d0ed;
+    opacity: 40%;
+  }
 
   .main-slider__image {
     @include default-transition;
+    position: relative;
     width: 80%;
     height: auto;
     max-height: 200px;
     object-fit: contain;
+    z-index: 2;
   }
 }
 
@@ -240,5 +284,21 @@ export default {
   margin-left: auto;
   max-width: 90%;
   overflow: hidden;
+}
+
+@media (min-width: $viewport--md) and (max-width: $viewport--lg) {
+  .main-slider__title {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .main-slider__title {
+    font-size: 16px;
+  }
+
+  .main-slider__date {
+    font-size: 14px;
+  }
 }
 </style>

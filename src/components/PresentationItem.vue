@@ -62,14 +62,18 @@ export default {
     .presentation-item__container {
       padding-top: 10px;
     }
+
+    .presentation-item__picture {
+      margin-right: 0;
+      background-image: none;
+    }
   }
 }
 
 .presentation-item__picture {
   position: relative;
-  width: 20%;
+  width: 30%;
   height: 100%;
-  margin-right: 10px;
   background-image: url("@/assets/images/bg/ravenna.png");
 }
 
@@ -83,7 +87,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 80%;
-  padding-top: 50px;
+  padding: 40px 10px;
 }
 
 .presentation-item__title {
@@ -104,6 +108,7 @@ export default {
   &-tag {
     position: relative;
     margin-right: 30px;
+    font-weight: bold;
     text-transform: uppercase;
   }
 
@@ -147,8 +152,81 @@ export default {
       content: "";
       width: 2px;
       height: 20px;
-      background-color: black;
+      background-color: $color-black;
     }
+  }
+}
+
+@media (min-width: $viewport--md) and (max-width: $viewport--lg) {
+  .presentation-item {
+    &--vertical {
+      .presentation-item__description {
+        .presentation-item__description-el {
+          margin-right: 30px;
+
+          &::after {
+            right: -16px;
+          }
+        }
+      }
+    }
+  }
+
+  .presentation-item__description {
+    .presentation-item__description-el {
+      margin-right: 5px;
+
+      &::after {
+        right: -4px;
+      }
+    }
+  }
+}
+
+@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .presentation-item {
+    flex-direction: column;
+    align-items: center;
+
+    .presentation-item__picture {
+      width: 100%;
+      min-height: 220px;
+    }
+  }
+
+  .presentation-item__container {
+    width: 100%;
+    padding: 15px 10px 25px 10px;
+    text-align: center;
+  }
+
+  .presentation-item__title {
+    margin-bottom: 10px;
+    font-size: 26px;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+
+  .presentation-item__date {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-size: 20px;
+
+    &-tag {
+      margin-right: 0;
+    }
+
+    &-time {
+      &::before {
+        width: 0;
+        height: 0;
+      }
+    }
+  }
+
+  .presentation-item__description {
+    font-size: 18px;
   }
 }
 </style>

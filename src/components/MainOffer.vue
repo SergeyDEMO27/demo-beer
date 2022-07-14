@@ -1,10 +1,10 @@
 <template>
   <section class="main-offer">
     <div class="main-offer__container">
-      <h2>Find the perfect beer</h2>
+      <h2>Find something new</h2>
       <!-- <button type="button" @click="findBeerByName">Find</button> -->
       <div class="main-offer__item">
-        <h3>Popular Beers</h3>
+        <h3>Get your perfect type of beer</h3>
         <MainOptions
           class="main-offer__options"
           :options="nameOptions"
@@ -17,15 +17,19 @@
       </div>
       <div class="main-offer__item">
         <h3>Find mystery beer</h3>
-        <button type="button" @click="generateBeer">Generate</button>
+        <MainButton class="main-offer__button" @click="generateBeer"
+          >Generate</MainButton
+        >
         <div class="main-offer__mystery">
-          <PresentationItem :presentationItem="randomBeer" :vertical="true" />
+          <PresentationItem
+            class="main-offer__mystery-item"
+            :presentationItem="randomBeer"
+            :vertical="true"
+          />
         </div>
-
-        <!-- <div>{{ randomBeer.name }}</div> -->
       </div>
       <div class="main-offer__item">
-        <h3>Popular Beers</h3>
+        <h3>Discover the ideal beer for your appetizers</h3>
         <MainOptions
           class="main-offer__options"
           :options="foodOptions"
@@ -45,6 +49,7 @@ import { mapActions, mapState } from "vuex";
 import MainOptions from "@/components/UI/MainOptions.vue";
 import MainSlider from "@/components/UI/MainSlider.vue";
 import PresentationItem from "@/components/PresentationItem.vue";
+import MainButton from "@/components/UI/MainButton.vue";
 
 export default {
   name: "MainOffer",
@@ -52,6 +57,7 @@ export default {
     MainOptions,
     MainSlider,
     PresentationItem,
+    MainButton,
   },
   data() {
     return {
@@ -112,6 +118,7 @@ export default {
 .main-offer {
   width: 100%;
   background-image: url("@/assets/images/bg/bg-brick-gray.jpg");
+  background-color: #e5d0ed;
 }
 
 .main-offer__container {
@@ -130,8 +137,33 @@ export default {
 }
 
 .main-offer__mystery {
-  width: 50%;
+  width: 100%;
   height: 400px;
   margin: 0 auto;
+  text-align: center;
+
+  &-item {
+    width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.main-offer__button {
+  &:hover {
+    color: $color-light-blue;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(1.05);
+  }
+}
+
+@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .main-offer__mystery {
+    &-item {
+      width: 100%;
+    }
+  }
 }
 </style>

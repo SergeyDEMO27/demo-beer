@@ -1,64 +1,71 @@
 <template>
   <div class="main-filter">
+    <MainButton class="main-filter__toggle" @click="toggleFilter"
+      >expand</MainButton
+    >
     <h2 class="main-filter__title">FILTER OPTIONS</h2>
-    <form class="main-filter__form" action="">
-      <MainInput
-        class="main-filter__input"
-        :title="'name'"
-        :inputType="'search'"
-        v-model:inputValue="searchNameValue"
-        :isInputActive="isInputActive.searchName"
-        @inputActive="() => (isInputActive.searchName = true)"
-        @inputNotActive="() => (isInputActive.searchName = false)"
-      />
-      <MainInput
-        class="main-filter__input"
-        :title="'food'"
-        :inputType="'search'"
-        v-model:inputValue="searchFoodValue"
-        :isInputActive="isInputActive.searchFood"
-        @inputActive="() => (isInputActive.searchFood = true)"
-        @inputNotActive="() => (isInputActive.searchFood = false)"
-      />
-      <MainRange
-        class="main-filter__input"
-        :title="abvValue.title"
-        :minValue="abvValue.abvMin"
-        :maxValue="abvValue.abvMax"
-        @updateMinValue="(value) => (abvValue.abvMin = value)"
-        @updateMaxValue="(value) => (abvValue.abvMax = value)"
-        :isInputActive="isInputActive.abv"
-        @minInputActive="() => (isInputActive.abv.min = true)"
-        @maxInputActive="() => (isInputActive.abv.max = true)"
-        @minInputNotActive="() => (isInputActive.abv.min = false)"
-        @maxInputNotActive="() => (isInputActive.abv.max = false)"
-      />
-      <MainRange
-        class="main-filter__input"
-        :title="ibuValue.title"
-        :minValue="ibuValue.ibuMin"
-        :maxValue="ibuValue.ibuMax"
-        :isInputActive="isInputActive.ibu"
-        @updateMinValue="(value) => (ibuValue.ibuMin = value)"
-        @updateMaxValue="(value) => (ibuValue.ibuMax = value)"
-        @minInputActive="() => (isInputActive.ibu.min = true)"
-        @maxInputActive="() => (isInputActive.ibu.max = true)"
-        @minInputNotActive="() => (isInputActive.ibu.min = false)"
-        @maxInputNotActive="() => (isInputActive.ibu.max = false)"
-      />
-      <MainRange
-        class="main-filter__input"
-        :title="ebcValue.title"
-        :minValue="ebcValue.ebcMin"
-        :maxValue="ebcValue.ebcMax"
-        :isInputActive="isInputActive.ebc"
-        @updateMinValue="(value) => (ebcValue.ebcMin = value)"
-        @updateMaxValue="(value) => (ebcValue.ebcMax = value)"
-        @minInputActive="() => (isInputActive.ebc.min = true)"
-        @maxInputActive="() => (isInputActive.ebc.max = true)"
-        @minInputNotActive="() => (isInputActive.ebc.min = false)"
-        @maxInputNotActive="() => (isInputActive.ebc.max = false)"
-      />
+    <form class="main-filter__form" v-if="isFilterVisible" action="">
+      <div class="main-filter__name-wrapper">
+        <MainInput
+          class="main-filter__input"
+          :title="'name'"
+          :inputType="'search'"
+          v-model:inputValue="searchNameValue"
+          :isInputActive="isInputActive.searchName"
+          @inputActive="() => (isInputActive.searchName = true)"
+          @inputNotActive="() => (isInputActive.searchName = false)"
+        />
+        <MainInput
+          class="main-filter__input"
+          :title="'food'"
+          :inputType="'search'"
+          v-model:inputValue="searchFoodValue"
+          :isInputActive="isInputActive.searchFood"
+          @inputActive="() => (isInputActive.searchFood = true)"
+          @inputNotActive="() => (isInputActive.searchFood = false)"
+        />
+      </div>
+      <div class="main-filter__abv-wrapper">
+        <MainRange
+          class="main-filter__input main-filter__input--range"
+          :title="abvValue.title"
+          :minValue="abvValue.abvMin"
+          :maxValue="abvValue.abvMax"
+          @updateMinValue="(value) => (abvValue.abvMin = value)"
+          @updateMaxValue="(value) => (abvValue.abvMax = value)"
+          :isInputActive="isInputActive.abv"
+          @minInputActive="() => (isInputActive.abv.min = true)"
+          @maxInputActive="() => (isInputActive.abv.max = true)"
+          @minInputNotActive="() => (isInputActive.abv.min = false)"
+          @maxInputNotActive="() => (isInputActive.abv.max = false)"
+        />
+        <MainRange
+          class="main-filter__input main-filter__input--range"
+          :title="ibuValue.title"
+          :minValue="ibuValue.ibuMin"
+          :maxValue="ibuValue.ibuMax"
+          :isInputActive="isInputActive.ibu"
+          @updateMinValue="(value) => (ibuValue.ibuMin = value)"
+          @updateMaxValue="(value) => (ibuValue.ibuMax = value)"
+          @minInputActive="() => (isInputActive.ibu.min = true)"
+          @maxInputActive="() => (isInputActive.ibu.max = true)"
+          @minInputNotActive="() => (isInputActive.ibu.min = false)"
+          @maxInputNotActive="() => (isInputActive.ibu.max = false)"
+        />
+        <MainRange
+          class="main-filter__input main-filter__input--range"
+          :title="ebcValue.title"
+          :minValue="ebcValue.ebcMin"
+          :maxValue="ebcValue.ebcMax"
+          :isInputActive="isInputActive.ebc"
+          @updateMinValue="(value) => (ebcValue.ebcMin = value)"
+          @updateMaxValue="(value) => (ebcValue.ebcMax = value)"
+          @minInputActive="() => (isInputActive.ebc.min = true)"
+          @maxInputActive="() => (isInputActive.ebc.max = true)"
+          @minInputNotActive="() => (isInputActive.ebc.min = false)"
+          @maxInputNotActive="() => (isInputActive.ebc.max = false)"
+        />
+      </div>
       <!-- <button onClick="clearFilter" type="button">Reset</button> -->
     </form>
   </div>
@@ -69,15 +76,18 @@ import { mapActions, mapMutations } from "vuex";
 import _ from "lodash";
 import MainInput from "@/components/UI/MainInput.vue";
 import MainRange from "@/components/UI/MainRange.vue";
+import MainButton from "@/components/UI/MainButton.vue";
 
 export default {
   name: "MainFilter",
   components: {
     MainInput,
     MainRange,
+    MainButton,
   },
   data() {
     return {
+      isFilterVisible: true,
       searchNameValue: "",
       searchFoodValue: "",
       abvValue: { title: "abv", abvMin: "", abvMax: "" },
@@ -117,6 +127,9 @@ export default {
         isNewReq,
       });
     }, 0),
+    toggleFilter() {
+      this.isFilterVisible = this.isFilterVisible === true ? false : true;
+    },
     // clearFilter() {
     //   console.log("Hello");
     //   this.searchNameValue = "";
@@ -190,6 +203,7 @@ export default {
 
 <style lang="scss">
 .main-filter {
+  position: relative;
   padding: 25px;
   background-color: $color-white;
   text-align: center;
@@ -207,5 +221,47 @@ export default {
 .main-filter__input {
   height: 32px;
   margin-bottom: 43px;
+}
+
+.main-filter__toggle {
+  display: none;
+}
+
+@media (min-width: $viewport--md) and (max-width: $viewport--lg) {
+  .main-filter {
+    padding: 10px;
+    max-height: 460px;
+  }
+
+  .main-filter__title {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .main-filter {
+    padding: 10px;
+  }
+
+  .main-filter__title {
+    margin-bottom: 30px;
+    font-size: 22px;
+  }
+
+  .main-filter__name-wrapper,
+  .main-filter__abv-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .main-filter__input {
+    &--range {
+      width: 32%;
+    }
+  }
+
+  .main-filter__toggle {
+    display: block;
+  }
 }
 </style>

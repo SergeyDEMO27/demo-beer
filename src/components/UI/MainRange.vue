@@ -84,4 +84,35 @@ export default {
 .main-range__input {
   width: 45%;
 }
+
+@media (min-width: $viewport--md) and (max-width: $viewport--lg) {
+  .main-range__title {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .main-range__container {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    &::after {
+      width: 0;
+      height: 0;
+    }
+  }
+
+  .main-range__title {
+    font-size: 20px;
+  }
+
+  .main-range__input {
+    width: 100%;
+  }
+
+  .main-range__input:not(:last-child) {
+    margin-bottom: 5px;
+  }
+}
 </style>

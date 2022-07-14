@@ -58,6 +58,8 @@ export default {
   width: 20%;
   max-height: 500px;
   background-color: #f1f1f2;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
 .main-presentation__list {
@@ -80,5 +82,31 @@ export default {
   width: 100%;
   height: 1px;
   background-color: transparent;
+}
+
+@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .main-presentation__wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-presentation__filter {
+    max-width: 500px;
+    width: 100%;
+    border-radius: 8px;
+    z-index: 10;
+  }
+
+  .main-presentation__list {
+    width: 100%;
+  }
+
+  .main-presentation__item {
+    width: 100%;
+
+    &--even {
+      background-color: transparent;
+    }
+  }
 }
 </style>

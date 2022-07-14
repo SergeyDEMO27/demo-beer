@@ -57,16 +57,30 @@ export default {
   height: 100%;
   padding-left: 9px;
   font-size: 22px;
-  // border: none;
-  // border-bottom: 2px solid $color-black;
-  // background-color: transparent;
-  border: 3px solid $color-black;
+  border: 2px solid #d9d9db;
+  box-shadow: 4px 4px 8px 0px rgb(34 60 80 / 20%);
   background-color: $color-white;
   border-radius: 8px;
   z-index: 2;
 
   &:focus {
     outline: none;
+  }
+}
+
+@media (min-width: $viewport--md) and (max-width: $viewport--lg) {
+  .main-input__label {
+    font-size: 19px;
+  }
+}
+
+@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .main-input {
+    width: 45%;
+  }
+
+  .main-input__label {
+    font-size: 18px;
   }
 }
 </style>
