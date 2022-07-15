@@ -18,6 +18,22 @@
           </div>
           <div class="main-slider__info">
             <h3 class="main-slider__title">{{ item.name }}</h3>
+            <p class="main-slider__description">
+              <span class="main-slider__description-tag">
+                {{ item.tagline }}
+              </span>
+              <span class="main-slider__description-abv">
+                <span class="main-slider__description-item">
+                  abv <span>{{ item.abv }}%</span>
+                </span>
+                <span class="main-slider__description-item">
+                  ibu <span>{{ item.ibu }}</span>
+                </span>
+                <span class="main-slider__description-item">
+                  og <span>{{ item.target_og }}</span>
+                </span>
+              </span>
+            </p>
             <p class="main-slider__date">{{ item.first_brewed }}</p>
           </div>
         </router-link>
@@ -54,8 +70,9 @@ export default {
       settings: {
         autoplay: "3500",
         transition: "1500",
-        itemsToShow: 5,
+        itemsToShow: 3,
         snapAlign: "center",
+        pauseAutoplayOnHover: "true",
         wrapAround: "true",
       },
       breakpoints: {
@@ -76,7 +93,7 @@ export default {
           snapAlign: "start",
         },
         1024: {
-          itemsToShow: 5,
+          itemsToShow: 3.95,
           snapAlign: "center",
         },
       },
@@ -93,6 +110,11 @@ export default {
   .carousel__viewport {
     padding-top: 11px;
     padding-bottom: 13px;
+  }
+
+  .carousel__slide {
+    position: relative;
+    min-height: 330px;
   }
 
   .main-slider__next,
@@ -212,6 +234,7 @@ export default {
 }
 
 .main-slider__item {
+  @include default-transition;
   width: 90%;
   min-height: 300px;
   padding-bottom: 10px;
@@ -221,16 +244,7 @@ export default {
   text-decoration: none;
   text-align: center;
   box-shadow: 4px 4px 12px -2px rgb(34 60 80 / 20%);
-
-  &:hover {
-    .main-slider__image {
-      transform: scale(1.05);
-    }
-
-    .main-slider__title {
-      color: $color-light-blue;
-    }
-  }
+  z-index: 9;
 }
 
 .main-slider__picture {
@@ -272,7 +286,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 63px;
+  min-height: 63px;
 }
 
 .main-slider__title {
@@ -284,6 +298,100 @@ export default {
   margin-left: auto;
   max-width: 90%;
   overflow: hidden;
+}
+
+.carousel__slide > .carousel__item {
+  transform: scale(1);
+  opacity: 0.5;
+  transition: 0.5s;
+}
+.carousel__slide--visible > .carousel__item {
+  position: absolute;
+  top: 0;
+  opacity: 1;
+  transform: rotateY(0);
+
+  &:hover {
+    @include default-transition;
+    width: 130%;
+    z-index: 10;
+
+    .main-slider__image {
+      transform: scale(1.05);
+    }
+
+    .main-slider__title {
+      color: $color-light-blue;
+    }
+
+    .main-slider__description {
+      visibility: visible;
+      height: auto;
+      opacity: 1;
+      transition: opacity 1s;
+    }
+  }
+}
+
+.carousel__slide--next > .carousel__item {
+  transform: scale(0.9) translate(-10px);
+}
+
+.carousel__slide--prev > .carousel__item {
+  transform: scale(0.9) translate(10px);
+}
+
+.carousel__slide--active > .carousel__item {
+  @include default-transition;
+  position: absolute;
+  top: 0;
+  transform: scale(1.1);
+
+  &:hover {
+    @include default-transition;
+    width: 130%;
+    z-index: 10;
+
+    .main-slider__image {
+      transform: scale(1.05);
+    }
+
+    .main-slider__title {
+      color: $color-light-blue;
+    }
+
+    .main-slider__description {
+      visibility: visible;
+      height: auto;
+      opacity: 1;
+      transition: opacity 1s;
+    }
+  }
+}
+
+.main-slider__description {
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 0;
+  opacity: 0;
+
+  &-tag {
+    margin-right: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &-item {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    span {
+      font-size: 15px;
+      font-weight: normal;
+    }
+  }
 }
 
 @media (min-width: $viewport--md) and (max-width: $viewport--lg) {

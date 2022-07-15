@@ -342,6 +342,10 @@ export default {
     flex-direction: column;
     padding: 0 20px;
 
+    span:first-child {
+      font-weight: bold;
+    }
+
     &::before {
       position: absolute;
       top: 0;
@@ -521,6 +525,7 @@ export default {
 }
 
 .product-preview__category {
+  font-size: 20px;
   color: $color-black;
   margin-bottom: 20px;
   margin-left: 55px;
