@@ -66,37 +66,83 @@ export default {
     .presentation-item__picture {
       margin-right: 0;
       background-image: none;
+
+      &::after {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &:hover {
+    .presentation-item__picture {
+      &:after {
+        background-color: transparent;
+      }
+
+      .presentation-item__image {
+        transform: scale(1.05);
+      }
+    }
+
+    .presentation-item__title {
+      color: $color-light-blue;
+
+      span {
+        color: $color-black;
+      }
     }
   }
 }
 
 .presentation-item__picture {
+  @include default-transition;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
   width: 30%;
   height: 100%;
-  background-image: url("@/assets/images/bg/ravenna.png");
+  background-image: url("@/assets/images/bg/bg-brick-gray.jpg");
+  background-size: cover;
+  text-align: center;
+
+  &:after {
+    @include default-transition;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: $color-plum;
+  }
 }
 
 .presentation-item__image {
-  @include center-element;
+  @include default-transition;
   max-width: 90%;
-  max-height: 90%;
+  max-height: 200px;
+  margin: 0 auto;
+  z-index: 2;
 }
 
 .presentation-item__container {
   display: flex;
   flex-direction: column;
   width: 80%;
+  margin: auto;
   padding: 40px 10px;
 }
 
 .presentation-item__title {
+  @include default-transition;
   margin-bottom: 15px;
   font-size: 30px;
   font-weight: normal;
   text-transform: uppercase;
 
   span {
+    @include default-transition;
     color: $color-light-blue;
   }
 }
@@ -160,7 +206,33 @@ export default {
 @media (min-width: $viewport--md) and (max-width: $viewport--lg) {
   .presentation-item {
     &--vertical {
+      .presentation-item__picture {
+        &::after {
+          background-color: transparent;
+        }
+      }
+
+      .presentation-item__title {
+        font-size: 30px;
+      }
+
+      .presentation-item__date {
+        font-size: 22px;
+
+        &-tag {
+          margin-right: 20px;
+        }
+
+        &-time {
+          &::before {
+            left: -9px;
+          }
+        }
+      }
+
       .presentation-item__description {
+        font-size: 20px;
+
         .presentation-item__description-el {
           margin-right: 30px;
 
@@ -172,12 +244,32 @@ export default {
     }
   }
 
+  .presentation-item__title {
+    font-size: 28px;
+  }
+
+  .presentation-item__date {
+    font-size: 20px;
+
+    &-tag {
+      margin-right: 15px;
+    }
+
+    &-time {
+      &::before {
+        left: -9px;
+      }
+    }
+  }
+
   .presentation-item__description {
+    font-size: 19px;
+
     .presentation-item__description-el {
-      margin-right: 5px;
+      margin-right: 10px;
 
       &::after {
-        right: -4px;
+        right: -7px;
       }
     }
   }
@@ -191,6 +283,14 @@ export default {
     .presentation-item__picture {
       width: 100%;
       min-height: 220px;
+    }
+
+    &--vertical {
+      .presentation-item__picture {
+        &::after {
+          background-color: transparent;
+        }
+      }
     }
   }
 

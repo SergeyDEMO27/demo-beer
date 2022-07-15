@@ -69,7 +69,7 @@ export default {
 
 @media (min-width: $viewport--md) and (max-width: $viewport--lg) {
   .range-input__label {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 

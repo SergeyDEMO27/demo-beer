@@ -70,11 +70,16 @@ export default {
 }
 
 .main-presentation__item {
+  @include default-transition;
   width: 50%;
   min-height: 230px;
 
   &--even {
     background-color: $color-light-gray;
+  }
+
+  &:hover {
+    background-color: $color-plum;
   }
 }
 

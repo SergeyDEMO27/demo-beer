@@ -87,7 +87,7 @@ export default {
 
 @media (min-width: $viewport--md) and (max-width: $viewport--lg) {
   .main-range__title {
-    font-size: 20px;
+    font-size: 19px;
   }
 }
 

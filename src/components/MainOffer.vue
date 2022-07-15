@@ -118,7 +118,6 @@ export default {
 .main-offer {
   width: 100%;
   background-image: url("@/assets/images/bg/bg-brick-gray.jpg");
-  background-color: #e5d0ed;
 }
 
 .main-offer__container {

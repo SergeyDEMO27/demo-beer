@@ -61,19 +61,19 @@ export default {
       breakpoints: {
         320: {
           itemsToShow: 1,
-          snapAlign: "center",
+          snapAlign: "start",
         },
         375: {
           itemsToShow: 2,
-          snapAlign: "center",
+          snapAlign: "start",
         },
         500: {
           itemsToShow: 3,
-          snapAlign: "center",
+          snapAlign: "start",
         },
         768: {
           itemsToShow: 4,
-          snapAlign: "center",
+          snapAlign: "start",
         },
         1024: {
           itemsToShow: 5,
@@ -236,6 +236,7 @@ export default {
 .main-slider__picture {
   position: relative;
   width: 100%;
+  min-height: 220px;
   max-height: 220px;
   margin-bottom: 7px;
   padding-top: 10px;
@@ -253,8 +254,7 @@ export default {
     content: "";
     width: 100%;
     height: 100%;
-    background-color: #e5d0ed;
-    opacity: 40%;
+    background-color: $color-plum;
   }
 
   .main-slider__image {
