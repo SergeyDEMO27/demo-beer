@@ -2,8 +2,10 @@
   <section class="product-preview">
     <div class="product-preview__container">
       <h1 class="product-preview__title">
-        <span class="product-preview__title-number">#{{ oneBeer.id }}</span>
-        {{ oneBeer.name }}
+        <div>
+          <span class="product-preview__title-number">#{{ oneBeer.id }}</span>
+          {{ oneBeer.name }}
+        </div>
         <span class="product-preview__title-date">{{
           oneBeer.first_brewed
         }}</span>
@@ -204,7 +206,22 @@
             </div>
           </div>
         </div>
-        <div class="product-preview__infocontainer">
+        <div
+          class="product-preview__infocontainer product-preview__infocontainer--picture"
+        >
+          <div class="product-preview__info" v-if="oneBeer.brewersTips">
+            <h3 class="product-preview__info-title">Buy BEER MAKING KIT</h3>
+            <div
+              class="product-preview__description product-preview__description--link"
+            >
+              <a
+                class="product-preview__link"
+                href="https://brooklynbrewshop.com/collections/beer-making-kits"
+              >
+                <img src="@/assets/images/icons/bbs-logo.png" alt="bbs" />
+              </a>
+            </div>
+          </div>
           <div class="product-preview__info">
             <h3 class="product-preview__info-title">PACKAGING</h3>
             <div
@@ -259,6 +276,9 @@ export default {
 
 .product-preview__title {
   @include main-description;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
   font-size: 64px;
   color: $color-black;
@@ -368,6 +388,34 @@ export default {
 
   &--image {
     padding: 0;
+  }
+
+  &--link {
+    width: 100%;
+    min-height: 81px;
+    padding: 0;
+  }
+}
+
+.product-preview__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 81px;
+  padding: 15px 20px;
+
+  img {
+    @include default-transition;
+    width: 88px;
+    height: 29px;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.05);
+    }
   }
 }
 
@@ -563,12 +611,93 @@ export default {
   width: 100%;
   max-height: 800px;
   padding: 20px;
-  background-image: url("@/assets/images/bg/ravenna.png");
+  background-image: url("@/assets/images/bg/bg-brick-gray.jpg");
+  background-size: cover;
   text-align: center;
 
   img {
     width: 55%;
     max-height: 800px;
+  }
+}
+
+@media (min-width: $viewport--md) and (max-width: $viewport--lg) {
+  .product-preview__description {
+    font-size: 16px;
+  }
+
+  .product-preview__base {
+    .product-preview__item-ing {
+      span {
+        width: 23%;
+      }
+
+      .product-preview__base-title {
+        width: 43%;
+      }
+    }
+  }
+
+  .product-preview__category {
+    font-size: 19px;
+  }
+}
+
+@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .product-preview__title {
+    flex-direction: column;
+    font-size: 50px;
+
+    &-number {
+      font-size: 46px;
+    }
+
+    &-date {
+      font-size: 36px;
+    }
+  }
+
+  .product-preview__tagcontainer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .product-preview__tag {
+      margin-bottom: 5px;
+      font-size: 32px;
+    }
+  }
+
+  .product-preview__wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-preview__infocontainer {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .product-preview__base {
+    .product-preview__item-ing {
+      span {
+        width: 23%;
+      }
+
+      .product-preview__base-title {
+        width: 43%;
+      }
+    }
+  }
+
+  .product-preview__category {
+    font-size: 19px;
+  }
+
+  .product-preview__infocontainer {
+    &--picture {
+      order: -3;
+    }
   }
 }
 </style>
