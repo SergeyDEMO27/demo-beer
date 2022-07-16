@@ -1,10 +1,9 @@
 <template>
   <section class="main-offer">
     <div class="main-offer__container">
-      <h2>Find something new</h2>
-      <!-- <button type="button" @click="findBeerByName">Find</button> -->
+      <h2 class="main-offer__main-title">Find something absolutely new</h2>
       <div class="main-offer__item">
-        <h3>Get your perfect type of beer</h3>
+        <h3 class="main-offer__title">Get your perfect type of beer</h3>
         <MainOptions
           class="main-offer__options"
           :options="nameOptions"
@@ -16,7 +15,7 @@
         </div>
       </div>
       <div class="main-offer__item">
-        <h3>Find mystery beer</h3>
+        <h3 class="main-offer__title">Find mystery beer</h3>
         <MainButton class="main-offer__button" @click="generateBeer"
           >Generate</MainButton
         >
@@ -29,7 +28,9 @@
         </div>
       </div>
       <div class="main-offer__item">
-        <h3>Discover the ideal beer for your appetizers</h3>
+        <h3 class="main-offer__title">
+          Discover the ideal beer for your appetizers
+        </h3>
         <MainOptions
           class="main-offer__options"
           :options="foodOptions"
@@ -125,13 +126,48 @@ export default {
   text-align: center;
 }
 
+.main-offer__main-title {
+  margin-bottom: 50px;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .main-offer__item {
   min-height: 400px;
-  margin-bottom: 60px;
+  margin-bottom: 35px;
   text-align: center;
 
   .main-offer__options {
     margin-bottom: 25px;
+  }
+}
+
+.main-offer__title {
+  @include main-title;
+  position: relative;
+  margin-bottom: 15px;
+  font-size: 40px;
+  color: $color-light-blue;
+  text-transform: capitalize;
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: -6px;
+    left: 0;
+    content: "";
+    width: 100%;
+    min-width: 700px;
+    height: 5px;
+    background-color: $color-black;
+    border-radius: 14px;
+  }
+
+  &::after {
+    top: unset;
+    bottom: -6px;
+    left: 0;
   }
 }
 
@@ -159,6 +195,19 @@ export default {
 }
 
 @media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .main-offer__main-title {
+    font-size: 34px;
+  }
+
+  .main-offer__title {
+    font-size: 32px;
+
+    &::before,
+    &::after {
+      min-width: auto;
+    }
+  }
+
   .main-offer__mystery {
     &-item {
       width: 100%;

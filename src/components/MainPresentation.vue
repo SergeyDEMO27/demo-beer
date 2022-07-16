@@ -54,9 +54,9 @@ export default {
 
 .main-presentation__filter {
   position: sticky;
-  top: 0;
+  top: 10px;
   width: 20%;
-  max-height: 500px;
+  max-height: 490px;
   background-color: #f1f1f2;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -89,6 +89,12 @@ export default {
   background-color: transparent;
 }
 
+@media (min-width: $viewport--md) and (max-width: $viewport--lg) {
+  .main-presentation__filter {
+    max-height: 479px;
+  }
+}
+
 @media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
   .main-presentation__wrapper {
     flex-direction: column;
@@ -103,11 +109,14 @@ export default {
   }
 
   .main-presentation__list {
+    max-width: 400px;
     width: 100%;
+    margin-top: 10px;
   }
 
   .main-presentation__item {
     width: 100%;
+    border-bottom: 2px solid $color-black;
 
     &--even {
       background-color: transparent;

@@ -86,11 +86,11 @@ export default {
         },
         500: {
           itemsToShow: 3,
-          snapAlign: "start",
+          snapAlign: "center",
         },
         768: {
-          itemsToShow: 4,
-          snapAlign: "start",
+          itemsToShow: 3.95,
+          snapAlign: "center",
         },
         1024: {
           itemsToShow: 3.95,
@@ -305,6 +305,7 @@ export default {
   opacity: 0.5;
   transition: 0.5s;
 }
+
 .carousel__slide--visible > .carousel__item {
   position: absolute;
   top: 0;
@@ -377,7 +378,7 @@ export default {
   opacity: 0;
 
   &-tag {
-    margin-right: 10px;
+    font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
   }
@@ -392,6 +393,10 @@ export default {
       font-weight: normal;
     }
   }
+
+  &-item:not(:last-child) {
+    margin-right: 13px;
+  }
 }
 
 @media (min-width: $viewport--md) and (max-width: $viewport--lg) {
@@ -400,13 +405,107 @@ export default {
   }
 }
 
-@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+@media (min-width: 500px) and (max-width: calc(#{$viewport--md} - 1px)) {
   .main-slider__title {
     font-size: 16px;
   }
 
+  .carousel__slide--visible > .carousel__item {
+    position: absolute;
+    top: 0;
+    opacity: 1;
+    transform: rotateY(0);
+
+    &:hover {
+      width: 90%;
+
+      .main-slider__image {
+        transform: scale(1);
+      }
+
+      .main-slider__title {
+        color: $color-light-blue;
+      }
+
+      .main-slider__description {
+        visibility: hidden;
+        height: 0;
+        opacity: 0;
+      }
+    }
+  }
+
+  .carousel__slide--active > .carousel__item {
+    @include default-transition;
+    position: absolute;
+    top: 0;
+    transform: scale(1.1);
+
+    &:hover {
+      width: 90%;
+
+      .main-slider__image {
+        transform: scale(1);
+      }
+
+      .main-slider__description {
+        visibility: hidden;
+        height: 0;
+        opacity: 0;
+      }
+    }
+  }
+
   .main-slider__date {
     font-size: 14px;
+  }
+}
+
+@media (min-width: $viewport--sm) and (max-width: 499px) {
+  .carousel__slide--visible > .carousel__item {
+    position: absolute;
+    top: 0;
+    opacity: 1;
+    transform: rotateY(0);
+
+    &:hover {
+      width: 90%;
+
+      .main-slider__image {
+        transform: scale(1);
+      }
+
+      .main-slider__title {
+        color: $color-light-blue;
+      }
+
+      .main-slider__description {
+        visibility: hidden;
+        height: 0;
+        opacity: 0;
+      }
+    }
+  }
+
+  .carousel__slide--active > .carousel__item {
+    @include default-transition;
+    position: absolute;
+    top: 0;
+    transform: scale(1);
+
+    &:hover {
+      width: 90%;
+
+      .main-slider__image {
+        transform: scale(1);
+      }
+
+      .main-slider__description {
+        visibility: hidden;
+        height: 0;
+        opacity: 0;
+      }
+    }
   }
 }
 </style>

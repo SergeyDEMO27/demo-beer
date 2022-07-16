@@ -1,10 +1,17 @@
 <template>
   <div class="main-filter">
-    <MainButton class="main-filter__toggle" @click="toggleFilter"
-      >expand</MainButton
-    >
+    <label class="main-filter__toggle" for="check">
+      <input type="checkbox" id="check" @click="toggleFilter" />
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
     <h2 class="main-filter__title">FILTER OPTIONS</h2>
-    <form class="main-filter__form" v-if="isFilterVisible" action="">
+    <form
+      class="main-filter__form"
+      :class="{ 'main-filter__form--visible': isFilterVisible }"
+      action=""
+    >
       <div class="main-filter__name-wrapper">
         <MainInput
           class="main-filter__input"
@@ -76,14 +83,14 @@ import { mapActions, mapMutations } from "vuex";
 import _ from "lodash";
 import MainInput from "@/components/UI/MainInput.vue";
 import MainRange from "@/components/UI/MainRange.vue";
-import MainButton from "@/components/UI/MainButton.vue";
+// import MainButton from "@/components/UI/MainButton.vue";
 
 export default {
   name: "MainFilter",
   components: {
     MainInput,
     MainRange,
-    MainButton,
+    // MainButton,
   },
   data() {
     return {
@@ -211,20 +218,109 @@ export default {
 
 .main-filter__title {
   margin-bottom: 45px;
+  font-size: 22px;
+  color: $color-light-blue;
 }
 
 .main-filter__form {
+  @include default-transition;
+  @include visually-hidden;
+  position: relative;
   display: flex;
   flex-direction: column;
+  opacity: 0;
+
+  &::after,
+  &::before {
+    position: absolute;
+    bottom: -32px;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: $color-black;
+  }
+
+  &::before {
+    top: -36px;
+    bottom: unset;
+  }
 }
 
 .main-filter__input {
   height: 32px;
   margin-bottom: 43px;
+
+  &--range:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 .main-filter__toggle {
-  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 45px;
+  visibility: hidden;
+  cursor: pointer;
+
+  span {
+    background: $color-light-blue;
+    border-radius: 10px;
+    height: 4px;
+    margin: 2px 0;
+    transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+
+  span:nth-of-type(1) {
+    transform-origin: bottom;
+    transform: rotatez(45deg) translate(3px, 0px);
+    width: 50%;
+  }
+
+  span:nth-of-type(2) {
+    transform-origin: top;
+    transform: rotatez(-45deg);
+    width: 75%;
+  }
+
+  span:nth-of-type(3) {
+    transform-origin: bottom;
+    width: 50%;
+    transform: translate(10px, -6px) rotatez(45deg);
+    // width: 75%;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  input[type="checkbox"]:checked ~ span:nth-of-type(1) {
+    // transform-origin: bottom;
+    // transform: rotatez(45deg) translate(8px, 0px);
+    width: 50%;
+    transform: rotatez(0) translate(0);
+    background: $color-black;
+  }
+
+  input[type="checkbox"]:checked ~ span:nth-of-type(2) {
+    // transform-origin: top;
+    // transform: rotatez(-45deg);
+    width: 100%;
+    transform: rotatez(0) translate(0);
+    background: $color-black;
+  }
+
+  input[type="checkbox"]:checked ~ span:nth-of-type(3) {
+    // transform-origin: bottom;
+    // width: 50%;
+    // transform: translate(30px, -11px) rotatez(45deg);
+    width: 75%;
+    transform: rotatez(0) translate(0);
+    background: $color-black;
+  }
 }
 
 @media (min-width: $viewport--md) and (max-width: $viewport--lg) {
@@ -241,11 +337,34 @@ export default {
 @media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
   .main-filter {
     padding: 10px;
+    border: 2px solid #d9d9db;
+    box-shadow: 4px 4px 8px 0px rgb(34 60 80 / 20%);
   }
 
   .main-filter__title {
-    margin-bottom: 30px;
+    margin-bottom: 0;
     font-size: 22px;
+  }
+
+  .main-filter__form {
+    margin-top: 5px;
+
+    &::after,
+    &::before {
+      width: 0;
+    }
+
+    &--visible {
+      position: static;
+      width: auto;
+      height: auto;
+      margin: auto;
+      margin-top: 5px;
+      clip: auto;
+      overflow: visible;
+      visibility: visible;
+      opacity: 1;
+    }
   }
 
   .main-filter__name-wrapper,
@@ -255,13 +374,15 @@ export default {
   }
 
   .main-filter__input {
+    margin-bottom: 32px;
+
     &--range {
       width: 32%;
     }
   }
 
   .main-filter__toggle {
-    display: block;
+    visibility: visible;
   }
 }
 </style>
