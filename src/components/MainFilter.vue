@@ -6,10 +6,15 @@
       <span></span>
       <span></span>
     </label>
-    <h2 class="main-filter__title">FILTER OPTIONS</h2>
+    <h2
+      class="main-filter__title"
+      :class="{ 'main-filter__title--visible': !isFilterVisible }"
+    >
+      FILTER OPTIONS
+    </h2>
     <form
       class="main-filter__form"
-      :class="{ 'main-filter__form--visible': isFilterVisible }"
+      :class="{ 'main-filter__form--visible': !isFilterVisible }"
       action=""
     >
       <div class="main-filter__name-wrapper">
@@ -94,7 +99,7 @@ export default {
   },
   data() {
     return {
-      isFilterVisible: true,
+      isFilterVisible: false,
       searchNameValue: "",
       searchFoodValue: "",
       abvValue: { title: "abv", abvMin: "", abvMax: "" },
@@ -217,9 +222,14 @@ export default {
 }
 
 .main-filter__title {
+  @include default-transition;
   margin-bottom: 45px;
   font-size: 22px;
-  color: $color-light-blue;
+  color: $color-black;
+
+  &--visible {
+    color: $color-light-blue;
+  }
 }
 
 .main-filter__form {
@@ -244,6 +254,15 @@ export default {
   &::before {
     top: -36px;
     bottom: unset;
+  }
+
+  &--visible {
+    width: auto;
+    height: auto;
+    margin: auto;
+    clip: auto;
+    overflow: visible;
+    opacity: 1;
   }
 }
 

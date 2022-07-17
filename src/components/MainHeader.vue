@@ -3,7 +3,12 @@
     <div class="main-header__container">
       <div class="main-header__logo">
         <router-link class="main-header__link" to="/">
-          <h1 class="main-header__title">D<span>e</span>mo-Beer</h1>
+          <h1 class="main-header__title">Demo-Beer</h1>
+          <img
+            class="main-header__image"
+            src="@/assets/images/icons/logo.png"
+            alt="Demo-beer logo"
+          />
         </router-link>
       </div>
       <MainNavigation :navItems="navItems" />
@@ -21,7 +26,10 @@ export default {
   },
   data() {
     return {
-      navItems: ["Recipes", "About Us", "Contacts"],
+      navItems: [
+        { id: "popular", name: "Popular" },
+        { id: "filter", name: "Filter" },
+      ],
     };
   },
 };
@@ -52,41 +60,12 @@ export default {
     text-transform: uppercase;
 
     .main-header__title {
-      @include main-title;
-      letter-spacing: 0.12em;
+      @include visually-hidden;
+    }
 
-      span {
-        @include main-title;
-        display: inline-block;
-        position: relative;
-        top: 30px;
-        transition: 0.4s;
-        color: red;
-        animation: wavy 7s infinite;
-      }
-    }
-  }
-
-  &:hover {
-    .main-header__link {
-      span {
-        top: 0;
-      }
-    }
-  }
-
-  @keyframes wavy {
-    0% {
-      transform: rotate(0);
-    }
-    30% {
-      transform: rotate(15deg);
-    }
-    70% {
-      transform: rotate(-15deg);
-    }
-    100% {
-      transform: rotate(0);
+    .main-header__image {
+      width: 80px;
+      height: 53px;
     }
   }
 }

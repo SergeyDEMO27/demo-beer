@@ -1,5 +1,5 @@
 <template>
-  <section class="main-presentation">
+  <section class="main-presentation" id="filter">
     <div class="main-presentation__container">
       <h2 class="main-presentation__title">RECIPES</h2>
       <div class="main-presentation__wrapper">

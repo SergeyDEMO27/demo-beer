@@ -1,10 +1,14 @@
 <template>
   <nav class="main-navigation">
     <ul class="main-navigation__list">
-      <li class="main-navigation__item" v-for="item in navItems" :key="item">
-        <router-link class="main-navigation__link" to="/">
-          {{ item }}
-        </router-link>
+      <li
+        class="main-navigation__item"
+        v-for="item in navItems"
+        :key="item.name"
+      >
+        <a class="main-navigation__link" :href="`#${item.id}`">
+          {{ item.name }}
+        </a>
       </li>
     </ul>
   </nav>
@@ -35,6 +39,7 @@ export default {
   padding: 0 15px;
   text-decoration: none;
   text-transform: uppercase;
+  cursor: pointer;
 
   &::before {
     content: "";

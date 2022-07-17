@@ -1,7 +1,7 @@
 <template>
-  <section class="main-offer">
+  <section class="main-offer" id="popular">
     <div class="main-offer__container">
-      <h2 class="main-offer__main-title">Find something absolutely new</h2>
+      <h2 class="main-offer__main-title">Open something absolutely new</h2>
       <div class="main-offer__item">
         <h3 class="main-offer__title">Get your perfect type of beer</h3>
         <MainOptions
@@ -123,6 +123,7 @@ export default {
 
 .main-offer__container {
   @include default-container;
+  padding-top: 50px;
   text-align: center;
 }
 
