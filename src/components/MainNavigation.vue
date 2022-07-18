@@ -25,18 +25,16 @@ export default {
 
 <style lang="scss">
 .main-navigation__list {
+  @include reset-list;
   display: flex;
 }
 
-.main-navigation__list {
-  @include reset-list;
-}
-
 .main-navigation__link {
-  @include main-description;
+  @include main-title;
   @include default-transition;
   position: relative;
-  padding: 0 15px;
+  margin-right: 15px;
+  font-size: 18px;
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
@@ -45,8 +43,8 @@ export default {
     content: "";
     position: absolute;
     bottom: -5px;
-    left: 10%;
-    width: 80%;
+    left: 0;
+    width: 100%;
     height: 2px;
     border-radius: 4px;
     background-color: $color-white;
@@ -62,6 +60,22 @@ export default {
       transform-origin: left;
       transform: scaleX(1);
     }
+  }
+}
+
+@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .main-navigation__link {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: $viewport--sm) and (max-width: 400px) {
+  .main-navigation__list {
+    flex-direction: column;
+  }
+
+  .main-navigation__link {
+    margin-right: 0;
   }
 }
 </style>

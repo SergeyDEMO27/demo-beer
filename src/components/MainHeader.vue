@@ -11,18 +11,21 @@
           />
         </router-link>
       </div>
-      <MainNavigation :navItems="navItems" />
+      <MainNavigation class="main-header__navigation" :navItems="navItems" />
+      <MainSocial class="main-header__social" />
     </div>
   </div>
 </template>
 
 <script>
 import MainNavigation from "@/components/MainNavigation.vue";
+import MainSocial from "@/components/MainSocial.vue";
 
 export default {
   name: "MainHeader",
   components: {
     MainNavigation,
+    MainSocial,
   },
   data() {
     return {
@@ -48,17 +51,14 @@ export default {
 .main-header__container {
   @include default-container;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
 .main-header__logo {
-  @include center-element;
+  order: -2;
 
   .main-header__link {
-    color: red;
-    text-decoration: none;
-    text-transform: uppercase;
-
     .main-header__title {
       @include visually-hidden;
     }
@@ -68,5 +68,29 @@ export default {
       height: 53px;
     }
   }
+}
+
+.main-header__navigation {
+  order: -3;
+}
+
+.main-header__social {
+  max-width: 100px;
+  order: -1;
+}
+
+@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+  .main-header__logo {
+    .main-header__link {
+      .main-header__image {
+        width: 70px;
+        height: 47px;
+      }
+    }
+  }
+}
+
+.main-header__social {
+  max-width: 80px;
 }
 </style>
