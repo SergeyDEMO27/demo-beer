@@ -44,6 +44,10 @@ export default {
 </script>
 
 <style lang="scss">
+.main-presentation {
+  width: 100%;
+}
+
 .main-presentation__container {
   @include default-container;
 }
