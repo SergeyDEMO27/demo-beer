@@ -47,14 +47,14 @@ export default {
     width: 100%;
     height: 2px;
     border-radius: 4px;
-    background-color: $color-white;
+    background-color: $color-light-blue;
     transform-origin: right;
     transform: scaleX(0);
     transition: transform 0.4s ease-in-out;
   }
 
   &:hover {
-    text-shadow: 1px 1px 1px rgba(255, 255, 255, 70%);
+    color: $color-light-blue;
 
     &::before {
       transform-origin: left;
@@ -63,7 +63,7 @@ export default {
   }
 }
 
-@media (min-width: $viewport--sm) and (max-width: calc(#{$viewport--md} - 1px)) {
+@media (min-width: 401px) and (max-width: calc(#{$viewport--md} - 1px)) {
   .main-navigation__link {
     font-size: 16px;
   }
@@ -76,6 +76,13 @@ export default {
 
   .main-navigation__link {
     margin-right: 0;
+    font-size: 16px;
+
+    &:hover {
+      &::before {
+        transform: scaleX(0);
+      }
+    }
   }
 }
 </style>

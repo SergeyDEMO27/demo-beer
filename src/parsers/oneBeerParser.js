@@ -1,17 +1,14 @@
+import dateStringify from "@/utils/dateStringify";
+
 export default (beer) => {
   return beer.reduce((acc, item) => {
-    const date = new Date();
-    date.setMonth(item.first_brewed.split("/")[0] - 1);
-
-    const dateName = date.toLocaleString("en-US", {
-      month: "long",
-    });
+    const newDate = dateStringify(item.first_brewed);
 
     acc = {
       id: item.id,
       name: item.name,
       tagline: item.tagline,
-      first_brewed: `${dateName} ${item.first_brewed.split("/")[1]}`,
+      first_brewed: newDate,
       description: item.description,
       image_url: item.image_url,
       abv: item.abv,

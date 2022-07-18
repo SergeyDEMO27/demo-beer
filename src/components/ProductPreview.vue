@@ -228,7 +228,18 @@
               class="product-preview__description product-preview__description--image"
             >
               <div class="product-preview__picture">
-                <img :src="oneBeer.image_url" :alt="oneBeer.name" />
+                <img
+                  :src="oneBeer.image_url"
+                  :alt="oneBeer.name"
+                  v-if="oneBeer.image_url"
+                />
+                <img
+                  :src="
+                    require(`@/assets/images/content/${'default-item'}.png`)
+                  "
+                  :alt="oneBeer.name"
+                  v-else
+                />
               </div>
             </div>
           </div>

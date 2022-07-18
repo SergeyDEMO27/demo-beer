@@ -88,9 +88,9 @@ export default {
       }
     }
   }
-}
 
-.main-header__social {
-  max-width: 80px;
+  .main-header__social {
+    max-width: 80px;
+  }
 }
 </style>

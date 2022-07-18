@@ -8,7 +8,14 @@
       <img
         class="presentation-item__image"
         :src="presentationItem.image_url"
-        alt=""
+        :alt="presentationItem.name"
+        v-if="presentationItem.image_url"
+      />
+      <img
+        class="presentation-item__image"
+        :src="require(`@/assets/images/content/${'default-item'}.png`)"
+        :alt="presentationItem.name"
+        v-else
       />
     </div>
     <div class="presentation-item__container">
