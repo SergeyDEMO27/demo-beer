@@ -9,6 +9,8 @@ export default {
     foodBeers: [],
     randomBeer: {},
     oneBeer: {},
+    isLoading: false,
+    oneBeerError: false,
     page: 0,
     perPage: 10,
   }),
@@ -42,6 +44,10 @@ export default {
 
     resetPage(state) {
       state.page = 1;
+    },
+
+    resetError(state) {
+      state.oneBeerError = false;
     },
   },
 
@@ -92,12 +98,18 @@ export default {
       commit("setRandomBeer", oneBeerParser(response.data));
     },
 
-    async getOneBeer({ commit }, { beerId }) {
-      const response = await axios.get(
-        `https://api.punkapi.com/v2/beers/${beerId}`
-      );
+    async getOneBeer({ commit, state }, { beerId }) {
+      state.isLoading = true;
+      try {
+        const response = await axios.get(
+          `https://api.punkapi.com/v2/beers/${beerId}`
+        );
 
-      commit("setOneBeer", oneBeerParser(response.data));
+        commit("setOneBeer", oneBeerParser(response.data));
+      } catch (error) {
+        state.oneBeerError = true;
+      }
+      state.isLoading = false;
     },
   },
 

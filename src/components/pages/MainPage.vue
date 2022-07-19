@@ -6,28 +6,32 @@
       <MainPresentation />
     </div>
     <MainFooter />
+    <!-- <MainModal> </MainModal> -->
   </div>
 </template>
 
 <script>
 import MainHeader from "@/components/MainHeader.vue";
+import MainFooter from "@/components/MainFooter.vue";
 import MainOffer from "@/components/MainOffer.vue";
 import MainPresentation from "@/components/MainPresentation.vue";
-import MainFooter from "@/components/MainFooter.vue";
+// import MainModal from "@/components/UI/MainModal.vue";
 
 export default {
   name: "MainPage",
   components: {
     MainHeader,
+    MainFooter,
     MainOffer,
     MainPresentation,
-    MainFooter,
+    // MainModal,
   },
 };
 </script>
 
 <style lang="scss">
 .main-page {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 100%;
