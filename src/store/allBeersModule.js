@@ -11,6 +11,7 @@ export default {
     oneBeer: {},
     isLoading: false,
     oneBeerError: false,
+    allBeerError: false,
     page: 0,
     perPage: 10,
   }),
@@ -48,6 +49,7 @@ export default {
 
     resetError(state) {
       state.oneBeerError = false;
+      state.allBeerError = false;
     },
   },
 
@@ -60,42 +62,58 @@ export default {
         return acc;
       }, {});
 
-      const response = await axios.get("https://api.punkapi.com/v2/beers", {
-        params: {
-          ...customParams,
-          ...{ page: state.page, per_page: state.perPage },
-        },
-      });
+      try {
+        const response = await axios.get("https://api.punkapi.com/v2/beers", {
+          params: {
+            ...customParams,
+            ...{ page: state.page, per_page: state.perPage },
+          },
+        });
 
-      commit("setAllBeers", { beers: beerParser(response.data), isNewReq });
+        commit("setAllBeers", { beers: beerParser(response.data), isNewReq });
+      } catch (error) {
+        state.allBeerError = true;
+      }
     },
 
-    async getNamedBeer({ commit }, { beerParams }) {
-      const response = await axios.get("https://api.punkapi.com/v2/beers", {
-        params: {
-          ...beerParams,
-        },
-      });
+    async getNamedBeer({ commit, state }, { beerParams }) {
+      try {
+        const response = await axios.get("https://api.punkapi.com/v2/beers", {
+          params: {
+            ...beerParams,
+          },
+        });
 
-      commit("setNamedBeer", { beer: beerParser(response.data) });
+        commit("setNamedBeer", { beer: beerParser(response.data) });
+      } catch (error) {
+        state.allBeerError = true;
+      }
     },
 
-    async getFoodsBeers({ commit }, { beerParams }) {
-      const response = await axios.get("https://api.punkapi.com/v2/beers", {
-        params: {
-          ...beerParams,
-        },
-      });
+    async getFoodsBeers({ commit, state }, { beerParams }) {
+      try {
+        const response = await axios.get("https://api.punkapi.com/v2/beers", {
+          params: {
+            ...beerParams,
+          },
+        });
 
-      commit("setFoodsBeers", { beer: beerParser(response.data) });
+        commit("setFoodsBeers", { beer: beerParser(response.data) });
+      } catch (error) {
+        state.allBeerError = true;
+      }
     },
 
-    async getRandomBeer({ commit }) {
-      const response = await axios.get(
-        "https://api.punkapi.com/v2/beers/random"
-      );
+    async getRandomBeer({ commit, state }) {
+      try {
+        const response = await axios.get(
+          "https://api.punkapi.com/v2/beers/random"
+        );
 
-      commit("setRandomBeer", oneBeerParser(response.data));
+        commit("setRandomBeer", oneBeerParser(response.data));
+      } catch (error) {
+        state.allBeerError = true;
+      }
     },
 
     async getOneBeer({ commit, state }, { beerId }) {

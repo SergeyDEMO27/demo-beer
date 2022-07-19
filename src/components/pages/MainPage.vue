@@ -6,16 +6,20 @@
       <MainPresentation />
     </div>
     <MainFooter />
-    <!-- <MainModal> </MainModal> -->
+    <MainModal @click="resetError" v-if="allBeerError">
+      <MainError>Something went wrong. Try to reload page</MainError>
+    </MainModal>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
 import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
 import MainOffer from "@/components/MainOffer.vue";
 import MainPresentation from "@/components/MainPresentation.vue";
-// import MainModal from "@/components/UI/MainModal.vue";
+import MainModal from "@/components/UI/MainModal.vue";
+import MainError from "@/components/UI/MainError.vue";
 
 export default {
   name: "MainPage",
@@ -24,7 +28,28 @@ export default {
     MainFooter,
     MainOffer,
     MainPresentation,
-    // MainModal,
+    MainModal,
+    MainError,
+  },
+  methods: {
+    ...mapMutations({
+      resetError: "allBeers/resetError",
+    }),
+  },
+  computed: {
+    ...mapState({
+      allBeerError: (state) => state.allBeers.allBeerError,
+    }),
+  },
+
+  watch: {
+    allBeerError() {
+      if (this.allBeerError === true) {
+        setTimeout(() => {
+          this.resetError();
+        }, 4000);
+      }
+    },
   },
 };
 </script>
