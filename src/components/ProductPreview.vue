@@ -281,8 +281,14 @@ export default {
 </script>
 
 <style lang="scss">
+.product-preview {
+  width: 100%;
+  background-image: url("@/assets/images/bg/bg-brick-gray.jpg");
+}
+
 .product-preview__container {
   @include default-container;
+  padding-top: 50px;
 }
 
 .product-preview__title {
@@ -291,7 +297,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  font-size: 64px;
+  font-size: 54px;
   color: $color-black;
   text-align: center;
 
@@ -627,7 +633,7 @@ export default {
   width: 100%;
   max-height: 800px;
   padding: 20px;
-  background-image: url("@/assets/images/bg/bg-brick-gray.jpg");
+  background-image: url("@/assets/images/bg/bg-brick-white.jpg");
   background-size: cover;
   text-align: center;
 

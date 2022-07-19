@@ -1,6 +1,6 @@
 <template>
   <div class="main-page">
-    <MainHeader />
+    <MainHeader :isMain="true" />
     <div class="main-page__main">
       <MainOffer />
       <MainPresentation />
@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
+import _ from "lodash";
 import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
 import MainOffer from "@/components/MainOffer.vue";
@@ -32,16 +33,33 @@ export default {
     MainError,
   },
   methods: {
+    ...mapActions({
+      getSearchBeer: "allBeers/getSearchBeer",
+    }),
     ...mapMutations({
       resetError: "allBeers/resetError",
     }),
+    searchBeer: _.debounce(function (isNewReq = true) {
+      this.getSearchBeer({
+        beerParams: {
+          beer_name: "",
+          food: "",
+          abv_gt: "",
+          abv_lt: "",
+          ibu_gt: "",
+          ibu_lt: "",
+          ebc_gt: "",
+          ebc_lt: "",
+        },
+        isNewReq,
+      });
+    }, 0),
   },
   computed: {
     ...mapState({
       allBeerError: (state) => state.allBeers.allBeerError,
     }),
   },
-
   watch: {
     allBeerError() {
       if (this.allBeerError === true) {
@@ -50,6 +68,9 @@ export default {
         }, 4000);
       }
     },
+  },
+  mounted() {
+    this.searchBeer();
   },
 };
 </script>

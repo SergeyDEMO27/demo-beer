@@ -166,15 +166,33 @@ export default {
     searchNameValue() {
       this.resetPage();
       this.searchBeer(false);
+      window.scroll({
+        top:
+          document.querySelector("#filter").getBoundingClientRect().top +
+          window.scrollY,
+        behavior: "smooth",
+      });
     },
     searchFoodValue() {
       this.resetPage();
       this.searchBeer(false);
+      window.scroll({
+        top:
+          document.querySelector("#filter").getBoundingClientRect().top +
+          window.scrollY,
+        behavior: "smooth",
+      });
     },
     abvValue: {
       handler() {
         this.resetPage();
         this.searchBeer(false);
+        window.scroll({
+          top:
+            document.querySelector("#filter").getBoundingClientRect().top +
+            window.scrollY,
+          behavior: "smooth",
+        });
       },
       deep: true,
     },
@@ -182,6 +200,12 @@ export default {
       handler() {
         this.resetPage();
         this.searchBeer(false);
+        window.scroll({
+          top:
+            document.querySelector("#filter").getBoundingClientRect().top +
+            window.scrollY,
+          behavior: "smooth",
+        });
       },
       deep: true,
     },
@@ -189,6 +213,12 @@ export default {
       handler() {
         this.resetPage();
         this.searchBeer(false);
+        window.scroll({
+          top:
+            document.querySelector("#filter").getBoundingClientRect().top +
+            window.scrollY,
+          behavior: "smooth",
+        });
       },
       deep: true,
     },
@@ -309,7 +339,6 @@ export default {
     transform-origin: bottom;
     width: 50%;
     transform: translate(10px, -6px) rotatez(45deg);
-    // width: 75%;
   }
 
   input[type="checkbox"] {
@@ -317,25 +346,18 @@ export default {
   }
 
   input[type="checkbox"]:checked ~ span:nth-of-type(1) {
-    // transform-origin: bottom;
-    // transform: rotatez(45deg) translate(8px, 0px);
     width: 50%;
     transform: rotatez(0) translate(0);
     background: $color-black;
   }
 
   input[type="checkbox"]:checked ~ span:nth-of-type(2) {
-    // transform-origin: top;
-    // transform: rotatez(-45deg);
     width: 100%;
     transform: rotatez(0) translate(0);
     background: $color-black;
   }
 
   input[type="checkbox"]:checked ~ span:nth-of-type(3) {
-    // transform-origin: bottom;
-    // width: 50%;
-    // transform: translate(30px, -11px) rotatez(45deg);
     width: 75%;
     transform: rotatez(0) translate(0);
     background: $color-black;

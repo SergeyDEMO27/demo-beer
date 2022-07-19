@@ -12,7 +12,7 @@ export default {
     isLoading: false,
     oneBeerError: false,
     allBeerError: false,
-    page: 0,
+    page: 1,
     perPage: 10,
   }),
 

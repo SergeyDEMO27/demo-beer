@@ -1,7 +1,6 @@
 <template>
   <section class="main-offer" id="popular">
     <div class="main-offer__container">
-      <h2 class="main-offer__main-title">Open something absolutely new</h2>
       <div class="main-offer__item">
         <h3 class="main-offer__title">Get your perfect type of beer</h3>
         <MainOptions
@@ -62,10 +61,10 @@ export default {
   },
   data() {
     return {
-      nameOptions: ["IPA", "Lager", "Stout", "Ale", "Porter", "Weisse"],
-      foodOptions: ["Chicken", "Beef", "Burger", "Pasta", "Salad", "Fish"],
+      nameOptions: ["IPA", "Lager", "Stout", "Ale", "Pale Ale"],
+      foodOptions: ["Fruit", "Beef", "Burger", "Pasta", "Salad", "Fish"],
       activeName: "IPA",
-      activeFood: "Chicken",
+      activeFood: "Fruit",
     };
   },
   methods: {
@@ -127,13 +126,6 @@ export default {
   text-align: center;
 }
 
-.main-offer__main-title {
-  margin-bottom: 50px;
-  font-size: 40px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
 .main-offer__item {
   min-height: 400px;
   margin-bottom: 35px;
@@ -147,29 +139,10 @@ export default {
 .main-offer__title {
   @include main-title;
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   font-size: 40px;
   color: $color-light-blue;
   text-transform: capitalize;
-
-  &::before,
-  &::after {
-    position: absolute;
-    top: -6px;
-    left: 0;
-    content: "";
-    width: 100%;
-    min-width: 700px;
-    height: 5px;
-    background-color: $color-black;
-    border-radius: 14px;
-  }
-
-  &::after {
-    top: unset;
-    bottom: -6px;
-    left: 0;
-  }
 }
 
 .main-offer__mystery {

@@ -109,7 +109,7 @@ export default {
   position: relative;
   width: 30%;
   height: 100%;
-  background-image: url("@/assets/images/bg/bg-brick-gray.jpg");
+  background-image: url("@/assets/images/bg/bg-brick-white.jpg");
   background-size: cover;
   text-align: center;
 

@@ -14,6 +14,13 @@
               class="main-slider__image"
               :src="item.image_url"
               :alt="item.name"
+              v-if="item.image_url"
+            />
+            <img
+              class="main-slider__image"
+              :src="require(`@/assets/images/content/${'default-item'}.png`)"
+              :alt="item.name"
+              v-else
             />
           </div>
           <div class="main-slider__info">
@@ -375,6 +382,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 0;
+  background-color: $color-plum;
   opacity: 0;
 
   &-tag {

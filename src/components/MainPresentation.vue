@@ -1,10 +1,14 @@
 <template>
   <section class="main-presentation" id="filter">
     <div class="main-presentation__container">
-      <h2 class="main-presentation__title">RECIPES</h2>
-      <div class="main-presentation__wrapper">
+      <h2 class="main-presentation__title">Find your ideal beer</h2>
+      <div class="main-presentation__wrapper" ref="presentation" id="present">
         <MainFilter class="main-presentation__filter" />
-        <ul class="main-presentation__list">
+        <TransitionGroup
+          name="main-presentation__list"
+          tag="ul"
+          class="main-presentation__list"
+        >
           <li
             class="main-presentation__item"
             :class="{
@@ -17,7 +21,7 @@
           >
             <PresentationItem :presentationItem="item" />
           </li>
-        </ul>
+        </TransitionGroup>
       </div>
     </div>
     <div id="observer" ref="observer" class="main-presentation__observer"></div>
@@ -45,11 +49,23 @@ export default {
 
 <style lang="scss">
 .main-presentation {
+  position: relative;
   width: 100%;
+  background-image: url("@/assets/images/bg/bg-brick-gray.jpg");
 }
 
 .main-presentation__container {
   @include default-container;
+}
+
+.main-presentation__title {
+  @include main-title;
+  position: relative;
+  margin-bottom: 25px;
+  font-size: 40px;
+  color: $color-light-blue;
+  text-transform: capitalize;
+  text-align: center;
 }
 
 .main-presentation__wrapper {
@@ -61,6 +77,7 @@ export default {
   top: 10px;
   width: 20%;
   max-height: 490px;
+  height: 490px;
   background-color: #f1f1f2;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -71,6 +88,17 @@ export default {
   display: flex;
   flex-wrap: wrap;
   width: 80%;
+
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.5s ease;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
 }
 
 .main-presentation__item {
@@ -79,7 +107,7 @@ export default {
   min-height: 230px;
 
   &--even {
-    background-color: $color-light-gray;
+    background-color: rgb(255, 255, 255, 50%);
   }
 
   &:hover {
@@ -96,6 +124,7 @@ export default {
 @media (min-width: $viewport--md) and (max-width: $viewport--lg) {
   .main-presentation__filter {
     max-height: 479px;
+    height: auto;
   }
 }
 
@@ -108,6 +137,7 @@ export default {
   .main-presentation__filter {
     max-width: 500px;
     width: 100%;
+    height: auto;
     border-radius: 8px;
     z-index: 10;
   }
