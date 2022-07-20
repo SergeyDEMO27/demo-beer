@@ -8,6 +8,7 @@
           name="main-presentation__list"
           tag="ul"
           class="main-presentation__list"
+          v-if="allBeers.length"
         >
           <li
             class="main-presentation__item"
@@ -22,6 +23,9 @@
             <PresentationItem :presentationItem="item" />
           </li>
         </TransitionGroup>
+        <div class="main-presentation__empty" v-else>
+          Nothing was found by your request
+        </div>
       </div>
     </div>
     <div id="observer" ref="observer" class="main-presentation__observer"></div>
@@ -70,6 +74,14 @@ export default {
 
 .main-presentation__wrapper {
   display: flex;
+}
+
+.main-presentation__empty {
+  @include main-title;
+  width: 100%;
+  margin-top: 240px;
+  color: $color-black;
+  text-align: center;
 }
 
 .main-presentation__filter {

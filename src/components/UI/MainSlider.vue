@@ -111,6 +111,7 @@ export default {
 
 <style lang="scss">
 .main-slider {
+  position: relative;
   padding-right: 20px;
   padding-left: 20px;
 

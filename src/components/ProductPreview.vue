@@ -288,7 +288,7 @@ export default {
 
 .product-preview__container {
   @include default-container;
-  padding-top: 50px;
+  padding-top: 120px;
 }
 
 .product-preview__title {
@@ -399,6 +399,7 @@ export default {
   color: $color-dark-gray;
   background-color: $color-light-gray;
   border-top: 4px solid $color-black;
+  box-shadow: 4px 4px 8px 0px rgb(34 60 80 / 20%);
   text-transform: uppercase;
   text-align: left;
 

@@ -93,6 +93,14 @@ export default {
           fill: $color-black;
         }
       }
+
+      &:hover {
+        .main-social__link {
+          svg {
+            fill: $color-light-blue;
+          }
+        }
+      }
     }
   }
 }

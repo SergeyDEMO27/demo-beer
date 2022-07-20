@@ -3,6 +3,7 @@
     :to="`/product/${presentationItem.id}`"
     class="presentation-item"
     :class="{ 'presentation-item--vertical': vertical }"
+    :key="presentationItem.id"
   >
     <div class="presentation-item__picture">
       <img
@@ -55,6 +56,15 @@ export default {
 </script>
 
 <style lang="scss">
+@keyframes itemEnter {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 .presentation-item {
   display: flex;
   width: 100%;
@@ -65,6 +75,7 @@ export default {
   &--vertical {
     flex-direction: column;
     align-items: center;
+    animation: itemEnter 1s;
 
     .presentation-item__container {
       padding-top: 10px;

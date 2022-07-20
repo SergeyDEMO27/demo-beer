@@ -78,7 +78,6 @@
           @maxInputNotActive="() => (isInputActive.ebc.max = false)"
         />
       </div>
-      <!-- <button onClick="clearFilter" type="button">Reset</button> -->
     </form>
   </div>
 </template>
@@ -88,14 +87,12 @@ import { mapActions, mapMutations } from "vuex";
 import _ from "lodash";
 import MainInput from "@/components/UI/MainInput.vue";
 import MainRange from "@/components/UI/MainRange.vue";
-// import MainButton from "@/components/UI/MainButton.vue";
 
 export default {
   name: "MainFilter",
   components: {
     MainInput,
     MainRange,
-    // MainButton,
   },
   data() {
     return {
@@ -138,29 +135,10 @@ export default {
         },
         isNewReq,
       });
-    }, 0),
+    }, 300),
     toggleFilter() {
       this.isFilterVisible = this.isFilterVisible === true ? false : true;
     },
-    // clearFilter() {
-    //   console.log("Hello");
-    //   this.searchNameValue = "";
-    //   this.searchFoodValue = "";
-    //   this.abvValue.abvMin = "";
-    //   this.abvValue.abvMax = "";
-    //   this.ibuValue.ibuMin = "";
-    //   this.ibuValue.ibuMax = "";
-    //   this.ebcValue.ebcMin = "";
-    //   this.ebcValue.ebcMax = "";
-    //   this.isInputActive.searchName = false;
-    //   this.isInputActive.searchFood = false;
-    //   this.isInputActive.abv.min = false;
-    //   this.isInputActive.abv.max = false;
-    //   this.isInputActive.ibu.min = false;
-    //   this.isInputActive.ibu.max = false;
-    //   this.isInputActive.ebc.min = false;
-    //   this.isInputActive.ebc.max = false;
-    // },
   },
   watch: {
     searchNameValue() {

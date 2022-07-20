@@ -13,8 +13,10 @@ export default {
 <style lang="scss">
 .main-button {
   @include default-transition;
+  // @include main-title;
   padding: 5px;
   font-size: 24px;
+  color: $color-black;
   border: 2px solid #d9d9db;
   background-color: $color-light-gray;
   box-shadow: 4px 4px 8px 0px rgb(34 60 80 / 20%);

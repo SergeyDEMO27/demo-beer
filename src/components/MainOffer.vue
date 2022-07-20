@@ -46,6 +46,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import _ from "lodash";
 import MainOptions from "@/components/UI/MainOptions.vue";
 import MainSlider from "@/components/UI/MainSlider.vue";
 import PresentationItem from "@/components/PresentationItem.vue";
@@ -87,9 +88,9 @@ export default {
         },
       });
     },
-    generateBeer() {
+    generateBeer: _.debounce(function () {
       this.getRandomBeer();
-    },
+    }, 200),
   },
   computed: {
     ...mapState({
@@ -122,7 +123,7 @@ export default {
 
 .main-offer__container {
   @include default-container;
-  padding-top: 50px;
+  padding-top: 120px;
   text-align: center;
 }
 
