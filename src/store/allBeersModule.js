@@ -78,6 +78,7 @@ export default {
 
     async getNamedBeer({ commit, state }, { beerParams }) {
       try {
+        state.namedBeer = [];
         const response = await axios.get("https://api.punkapi.com/v2/beers", {
           params: {
             ...beerParams,
@@ -92,6 +93,7 @@ export default {
 
     async getFoodsBeers({ commit, state }, { beerParams }) {
       try {
+        state.foodBeers = [];
         const response = await axios.get("https://api.punkapi.com/v2/beers", {
           params: {
             ...beerParams,

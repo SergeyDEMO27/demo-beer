@@ -3,7 +3,12 @@
     class="main-slider"
     :class="{ 'main-slider--reverse': direction === 'rtl' }"
   >
-    <Carousel :settings="settings" :breakpoints="breakpoints" :dir="direction">
+    <Carousel
+      class="main-slider__carousel"
+      :settings="settings"
+      :breakpoints="breakpoints"
+      :dir="direction"
+    >
       <Slide v-for="item in items" :key="item.name">
         <router-link
           class="carousel__item main-slider__item"
@@ -62,7 +67,6 @@
 
 <script>
 import { Carousel, Navigation, Slide } from "vue3-carousel";
-
 import "vue3-carousel/dist/carousel.css";
 
 export default {
@@ -118,6 +122,7 @@ export default {
   .carousel__viewport {
     padding-top: 11px;
     padding-bottom: 13px;
+    animation: itemsEnter 1s;
   }
 
   .carousel__slide {
@@ -405,6 +410,15 @@ export default {
 
   &-item:not(:last-child) {
     margin-right: 13px;
+  }
+}
+
+@keyframes itemsEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100%;
   }
 }
 

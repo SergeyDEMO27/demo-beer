@@ -86,7 +86,7 @@ export default {
 
 .main-presentation__filter {
   position: sticky;
-  top: 10px;
+  top: 60px;
   width: 20%;
   max-height: 490px;
   height: 490px;
@@ -147,6 +147,7 @@ export default {
   }
 
   .main-presentation__filter {
+    top: 68px;
     max-width: 500px;
     width: 100%;
     height: auto;

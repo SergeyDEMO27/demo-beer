@@ -27,7 +27,7 @@ export default {
 .main-footer {
   width: 100%;
   background-color: $color-black;
-  border-top: 1px solid salmon;
+  border-top: 1px solid $color-orange;
 }
 
 .main-footer__container {

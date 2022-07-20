@@ -56,15 +56,6 @@ export default {
 </script>
 
 <style lang="scss">
-@keyframes itemEnter {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
 .presentation-item {
   display: flex;
   width: 100%;
@@ -218,6 +209,15 @@ export default {
       height: 20px;
       background-color: $color-black;
     }
+  }
+}
+
+@keyframes itemEnter {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
   }
 }
 

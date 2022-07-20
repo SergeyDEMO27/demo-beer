@@ -9,12 +9,16 @@
           :activeOption="activeName"
           @changeOption="(option) => (activeName = option)"
         />
-        <div v-if="namedBeer.length">
-          <MainSlider :items="namedBeer" :direction="'ltr'" />
+        <div class="main-offer__slider">
+          <MainSlider
+            v-if="namedBeer.length"
+            :items="namedBeer"
+            :direction="'ltr'"
+          />
         </div>
       </div>
       <div class="main-offer__item">
-        <h3 class="main-offer__title">Find mystery beer</h3>
+        <h3 class="main-offer__title">Find the mystery beer</h3>
         <MainButton class="main-offer__button" @click="generateBeer"
           >Generate</MainButton
         >
@@ -28,7 +32,7 @@
       </div>
       <div class="main-offer__item">
         <h3 class="main-offer__title">
-          Discover the ideal beer for your appetizers
+          Discover the best beer for your appetizers
         </h3>
         <MainOptions
           class="main-offer__options"
@@ -36,8 +40,12 @@
           :activeOption="activeFood"
           @changeOption="(option) => (activeFood = option)"
         />
-        <div v-if="foodBeers.length">
-          <MainSlider :items="foodBeers" :direction="'rtl'" />
+        <div class="main-offer__slider">
+          <MainSlider
+            v-if="foodBeers.length"
+            :items="foodBeers"
+            :direction="'rtl'"
+          />
         </div>
       </div>
     </div>
@@ -144,6 +152,10 @@ export default {
   font-size: 40px;
   color: $color-light-blue;
   text-transform: capitalize;
+}
+
+.main-offer__slider {
+  min-height: 360px;
 }
 
 .main-offer__mystery {

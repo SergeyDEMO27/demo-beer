@@ -93,7 +93,7 @@ export default {
   background-color: $color-black;
   min-height: 50px;
   color: $color-white;
-  border-bottom: 1px solid salmon;
+  border-bottom: 1px solid $color-orange;
   overflow-y: hidden;
   z-index: 100;
 

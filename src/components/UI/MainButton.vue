@@ -13,7 +13,6 @@ export default {
 <style lang="scss">
 .main-button {
   @include default-transition;
-  // @include main-title;
   padding: 5px;
   font-size: 24px;
   color: $color-black;
