@@ -6,11 +6,7 @@
         v-for="item in navItems"
         :key="item.name"
       >
-        <a
-          class="main-navigation__link"
-          :class="{ 'main-navigation__link--top': isTopHeader }"
-          :href="`#${item.id}`"
-        >
+        <a class="main-navigation__link" :href="`#${item.id}`">
           {{ item.name }}
         </a>
       </li>
@@ -23,7 +19,6 @@ export default {
   name: "MainNavigation",
   props: {
     navItems: Array,
-    isTopHeader: Boolean,
   },
 };
 </script>
@@ -43,10 +38,6 @@ export default {
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
-
-  &--top {
-    color: $color-black;
-  }
 
   &::before {
     content: "";

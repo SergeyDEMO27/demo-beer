@@ -3,9 +3,9 @@
     class="main-header"
     :class="{
       'main-header--hidden': !isShowHeader,
-      'main-header--top': isTopHeader,
     }"
     @mouseover="showHeader"
+    @mouseout="hideHeader"
   >
     <div class="main-header__container">
       <div class="main-header__logo">
@@ -54,7 +54,6 @@ export default {
     return {
       isShowHeader: true,
       isTopHeader: true,
-      lastScrollPosition: 0,
       navItems: [
         { id: "popular", name: "Popular" },
         { id: "filter", name: "Filter" },
@@ -65,15 +64,18 @@ export default {
     showHeader() {
       this.isShowHeader = true;
     },
+    hideHeader() {
+      if (window.scrollY > 40) {
+        this.isShowHeader = false;
+      }
+    },
     onScroll() {
       const currentScrollPosition =
         window.scrollY || document.documentElement.scrollTop;
       if (currentScrollPosition < 0) {
         return;
       }
-      this.isTopHeader = window.scrollY === 0 ? true : false;
-      this.isShowHeader = currentScrollPosition < this.lastScrollPosition;
-      this.lastScrollPosition = currentScrollPosition;
+      this.isShowHeader = currentScrollPosition <= 40;
     },
   },
   mounted() {
@@ -97,13 +99,8 @@ export default {
   overflow-y: hidden;
   z-index: 100;
 
-  &--top {
-    background-color: transparent;
-    border-color: transparent;
-  }
-
   &--hidden {
-    transform: translate3d(0, -95%, 0);
+    transform: translate3d(0, -92%, 0);
   }
 }
 

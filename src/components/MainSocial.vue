@@ -1,9 +1,6 @@
 <template>
   <div class="main-social">
-    <ul
-      class="main-social__list"
-      :class="{ 'main-social__list--top': isTopHeader }"
-    >
+    <ul class="main-social__list">
       <li class="main-social__item">
         <a
           class="main-social__link"
@@ -64,9 +61,6 @@ import sprite from "@/assets/images/sprite/sprite.svg";
 
 export default {
   name: "MainSocial",
-  props: {
-    isTopHeader: Boolean,
-  },
   setup() {
     return {
       sprite,
@@ -85,24 +79,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  &--top {
-    .main-social__item {
-      .main-social__link {
-        svg {
-          fill: $color-black;
-        }
-      }
-
-      &:hover {
-        .main-social__link {
-          svg {
-            fill: $color-light-blue;
-          }
-        }
-      }
-    }
-  }
 }
 
 .main-social__item {
