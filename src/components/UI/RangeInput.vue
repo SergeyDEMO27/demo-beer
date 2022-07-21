@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="range-input"
-    :class="{ 'range-input--active': inputValue || isInputActive }"
-  >
+  <div class="range-input" :class="{ 'range-input--active': inputValue }">
     <label class="range-input__label" :for="title">{{ title }}</label>
     <input
       class="range-input__input-field"
@@ -10,8 +7,6 @@
       :type="inputType"
       :value="inputValue"
       @input="(event) => this.$emit('updateValue', event.target.value)"
-      @focus="$emit('inputActive')"
-      @blur="$emit('inputNotActive')"
     />
   </div>
 </template>
@@ -24,7 +19,6 @@ export default {
     title: String,
     inputType: String,
     inputValue: [String, Number],
-    isInputActive: Boolean,
   },
 };
 </script>
@@ -36,6 +30,7 @@ export default {
   &--active {
     .range-input__label {
       bottom: 35px;
+      color: $color-light-blue;
     }
   }
 }

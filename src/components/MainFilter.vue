@@ -22,60 +22,39 @@
           class="main-filter__input"
           :title="'name'"
           :inputType="'search'"
-          v-model:inputValue="searchNameValue"
-          :isInputActive="isInputActive.searchName"
-          @inputActive="() => (isInputActive.searchName = true)"
-          @inputNotActive="() => (isInputActive.searchName = false)"
+          v-model:inputValue="filterValue.searchNameValue"
         />
         <MainInput
           class="main-filter__input"
           :title="'food'"
           :inputType="'search'"
-          v-model:inputValue="searchFoodValue"
-          :isInputActive="isInputActive.searchFood"
-          @inputActive="() => (isInputActive.searchFood = true)"
-          @inputNotActive="() => (isInputActive.searchFood = false)"
+          v-model:inputValue="filterValue.searchFoodValue"
         />
       </div>
       <div class="main-filter__abv-wrapper">
         <MainRange
           class="main-filter__input main-filter__input--range"
-          :title="abvValue.title"
-          :minValue="abvValue.abvMin"
-          :maxValue="abvValue.abvMax"
-          @updateMinValue="(value) => (abvValue.abvMin = value)"
-          @updateMaxValue="(value) => (abvValue.abvMax = value)"
-          :isInputActive="isInputActive.abv"
-          @minInputActive="() => (isInputActive.abv.min = true)"
-          @maxInputActive="() => (isInputActive.abv.max = true)"
-          @minInputNotActive="() => (isInputActive.abv.min = false)"
-          @maxInputNotActive="() => (isInputActive.abv.max = false)"
+          :title="filterValue.abvValue.title"
+          :minValue="filterValue.abvValue.abvMin"
+          :maxValue="filterValue.abvValue.abvMax"
+          @updateMinValue="(value) => (filterValue.abvValue.abvMin = value)"
+          @updateMaxValue="(value) => (filterValue.abvValue.abvMax = value)"
         />
         <MainRange
           class="main-filter__input main-filter__input--range"
-          :title="ibuValue.title"
-          :minValue="ibuValue.ibuMin"
-          :maxValue="ibuValue.ibuMax"
-          :isInputActive="isInputActive.ibu"
-          @updateMinValue="(value) => (ibuValue.ibuMin = value)"
-          @updateMaxValue="(value) => (ibuValue.ibuMax = value)"
-          @minInputActive="() => (isInputActive.ibu.min = true)"
-          @maxInputActive="() => (isInputActive.ibu.max = true)"
-          @minInputNotActive="() => (isInputActive.ibu.min = false)"
-          @maxInputNotActive="() => (isInputActive.ibu.max = false)"
+          :title="filterValue.ibuValue.title"
+          :minValue="filterValue.ibuValue.ibuMin"
+          :maxValue="filterValue.ibuValue.ibuMax"
+          @updateMinValue="(value) => (filterValue.ibuValue.ibuMin = value)"
+          @updateMaxValue="(value) => (filterValue.ibuValue.ibuMax = value)"
         />
         <MainRange
           class="main-filter__input main-filter__input--range"
-          :title="ebcValue.title"
-          :minValue="ebcValue.ebcMin"
-          :maxValue="ebcValue.ebcMax"
-          :isInputActive="isInputActive.ebc"
-          @updateMinValue="(value) => (ebcValue.ebcMin = value)"
-          @updateMaxValue="(value) => (ebcValue.ebcMax = value)"
-          @minInputActive="() => (isInputActive.ebc.min = true)"
-          @maxInputActive="() => (isInputActive.ebc.max = true)"
-          @minInputNotActive="() => (isInputActive.ebc.min = false)"
-          @maxInputNotActive="() => (isInputActive.ebc.max = false)"
+          :title="filterValue.ebcValue.title"
+          :minValue="filterValue.ebcValue.ebcMin"
+          :maxValue="filterValue.ebcValue.ebcMax"
+          @updateMinValue="(value) => (filterValue.ebcValue.ebcMin = value)"
+          @updateMaxValue="(value) => (filterValue.ebcValue.ebcMax = value)"
         />
       </div>
     </form>
@@ -97,19 +76,14 @@ export default {
   data() {
     return {
       isFilterVisible: false,
-      searchNameValue: "",
-      searchFoodValue: "",
-      abvValue: { title: "abv", abvMin: "", abvMax: "" },
-      ibuValue: { title: "ibu", ibuMin: "", ibuMax: "" },
-      ebcValue: { title: "ebc", ebcMin: "", ebcMax: "" },
-      observer: null,
-      isInputActive: {
-        searchName: false,
-        searchFood: false,
-        abv: { min: false, max: false },
-        ibu: { min: false, max: false },
-        ebc: { min: false, max: false },
+      filterValue: {
+        searchNameValue: "",
+        searchFoodValue: "",
+        abvValue: { title: "abv", abvMin: "", abvMax: "" },
+        ibuValue: { title: "ibu", ibuMin: "", ibuMax: "" },
+        ebcValue: { title: "ebc", ebcMin: "", ebcMax: "" },
       },
+      observer: null,
     };
   },
   methods: {
@@ -124,14 +98,14 @@ export default {
     searchBeer: _.debounce(function (isNewReq = true) {
       this.getSearchBeer({
         beerParams: {
-          beer_name: this.searchNameValue,
-          food: this.searchFoodValue,
-          abv_gt: this.abvValue.abvMin,
-          abv_lt: this.abvValue.abvMax,
-          ibu_gt: this.ibuValue.ibuMin,
-          ibu_lt: this.ibuValue.ibuMax,
-          ebc_gt: this.ebcValue.ebcMin,
-          ebc_lt: this.ebcValue.ebcMax,
+          beer_name: this.filterValue.searchNameValue,
+          food: this.filterValue.searchFoodValue,
+          abv_gt: this.filterValue.abvValue.abvMin,
+          abv_lt: this.filterValue.abvValue.abvMax,
+          ibu_gt: this.filterValue.ibuValue.ibuMin,
+          ibu_lt: this.filterValue.ibuValue.ibuMax,
+          ebc_gt: this.filterValue.ebcValue.ebcMin,
+          ebc_lt: this.filterValue.ebcValue.ebcMax,
         },
         isNewReq,
       });
@@ -141,53 +115,7 @@ export default {
     },
   },
   watch: {
-    searchNameValue() {
-      this.resetPage();
-      this.searchBeer(false);
-      window.scroll({
-        top:
-          document.querySelector("#filter").getBoundingClientRect().top +
-          window.scrollY,
-        behavior: "smooth",
-      });
-    },
-    searchFoodValue() {
-      this.resetPage();
-      this.searchBeer(false);
-      window.scroll({
-        top:
-          document.querySelector("#filter").getBoundingClientRect().top +
-          window.scrollY,
-        behavior: "smooth",
-      });
-    },
-    abvValue: {
-      handler() {
-        this.resetPage();
-        this.searchBeer(false);
-        window.scroll({
-          top:
-            document.querySelector("#filter").getBoundingClientRect().top +
-            window.scrollY,
-          behavior: "smooth",
-        });
-      },
-      deep: true,
-    },
-    ibuValue: {
-      handler() {
-        this.resetPage();
-        this.searchBeer(false);
-        window.scroll({
-          top:
-            document.querySelector("#filter").getBoundingClientRect().top +
-            window.scrollY,
-          behavior: "smooth",
-        });
-      },
-      deep: true,
-    },
-    ebcValue: {
+    filterValue: {
       handler() {
         this.resetPage();
         this.searchBeer(false);

@@ -17,7 +17,6 @@ export default {
   font-weight: bold;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  background: #cf0606;
   background: linear-gradient(to right, #cf0606 0%, #8f0e0c 100%);
   background-clip: text;
   -webkit-background-clip: text;

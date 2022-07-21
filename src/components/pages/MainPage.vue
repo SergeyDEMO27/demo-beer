@@ -6,9 +6,11 @@
       <MainPresentation />
     </div>
     <MainFooter />
-    <MainModal @click="resetError" v-if="allBeerError">
-      <MainError>Something went wrong. Try to reload page</MainError>
-    </MainModal>
+    <Transition name="main-page__modal">
+      <MainModal @click="resetError" v-if="allBeerError">
+        <MainError>Something went wrong. Try to reload page</MainError>
+      </MainModal>
+    </Transition>
   </div>
 </template>
 
@@ -53,7 +55,7 @@ export default {
         },
         isNewReq,
       });
-    }, 0),
+    }, 100),
   },
   computed: {
     ...mapState({
@@ -85,5 +87,15 @@ export default {
   &__main {
     flex: 1 1 auto;
   }
+}
+
+.main-page__modal-enter-active,
+.main-page__modal-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.main-page__modal-enter-from,
+.main-page__modal-leave-to {
+  opacity: 0;
 }
 </style>

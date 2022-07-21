@@ -3,7 +3,10 @@
     <div class="main-presentation__container">
       <h2 class="main-presentation__title">Find your ideal beer</h2>
       <div class="main-presentation__wrapper" ref="presentation" id="present">
-        <MainFilter class="main-presentation__filter" />
+        <MainFilter
+          class="main-presentation__filter"
+          :class="{ 'main-presentation__filter--top': isHeaderShow }"
+        />
         <TransitionGroup
           name="main-presentation__list"
           tag="ul"
@@ -46,6 +49,7 @@ export default {
   computed: {
     ...mapState({
       allBeers: (state) => state.allBeers.allBeers,
+      isHeaderShow: (state) => state.headerModule.isHeaderShow,
     }),
   },
 };
@@ -85,14 +89,19 @@ export default {
 }
 
 .main-presentation__filter {
+  @include default-transition;
   position: sticky;
-  top: 60px;
+  top: 10px;
   width: 20%;
   max-height: 490px;
   height: 490px;
   background-color: #f1f1f2;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
+
+  &--top {
+    top: 65px;
+  }
 }
 
 .main-presentation__list {
@@ -116,6 +125,7 @@ export default {
 .main-presentation__item {
   @include default-transition;
   width: 50%;
+  max-height: 250px;
   min-height: 230px;
 
   &--even {
@@ -147,12 +157,16 @@ export default {
   }
 
   .main-presentation__filter {
-    top: 68px;
+    top: 10px;
     max-width: 500px;
     width: 100%;
     height: auto;
     border-radius: 8px;
     z-index: 10;
+
+    &--top {
+      top: 65px;
+    }
   }
 
   .main-presentation__list {
@@ -163,6 +177,7 @@ export default {
 
   .main-presentation__item {
     width: 100%;
+    max-height: unset;
     border-bottom: 2px solid $color-black;
 
     &--even {

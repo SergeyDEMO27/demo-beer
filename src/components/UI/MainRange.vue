@@ -8,9 +8,6 @@
         :inputType="'number'"
         :inputValue="minValue"
         @updateValue="updateMinVal"
-        :isInputActive="isInputActive.min"
-        @inputActive="$emit('minInputActive')"
-        @inputNotActive="$emit('minInputNotActive')"
       />
       <RangeInput
         class="main-range__input"
@@ -18,9 +15,6 @@
         :inputType="'number'"
         :inputValue="maxValue"
         @updateValue="updateMaxVal"
-        :isInputActive="isInputActive.max"
-        @inputActive="$emit('maxInputActive')"
-        @inputNotActive="$emit('maxInputNotActive')"
       />
     </div>
   </div>
@@ -38,7 +32,6 @@ export default {
     title: String,
     minValue: String,
     maxValue: String,
-    isInputActive: Object,
   },
   methods: {
     updateMinVal(value) {

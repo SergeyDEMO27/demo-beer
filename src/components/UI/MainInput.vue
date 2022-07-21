@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="main-input"
-    :class="{ 'main-input--active': inputValue || isInputActive }"
-  >
+  <div class="main-input" :class="{ 'main-input--active': inputValue }">
     <label class="main-input__label" :for="title">{{ title }}</label>
     <input
       class="main-input__input-field"
@@ -10,8 +7,6 @@
       :type="inputType"
       :value="inputValue"
       @input="(event) => $emit('update:inputValue', event.target.value)"
-      @focus="$emit('inputActive')"
-      @blur="$emit('inputNotActive')"
     />
   </div>
 </template>
@@ -23,7 +18,6 @@ export default {
     title: String,
     inputType: String,
     inputValue: [String, Number],
-    isInputActive: Boolean,
   },
 };
 </script>
@@ -36,6 +30,7 @@ export default {
   &--active {
     .main-input__label {
       bottom: 35px;
+      color: $color-light-blue;
     }
   }
 }

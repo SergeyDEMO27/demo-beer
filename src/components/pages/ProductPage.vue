@@ -5,12 +5,16 @@
       <ProductPreview />
     </div>
     <MainFooter />
-    <MainModal v-if="isLoading">
-      <MainLoader />
-    </MainModal>
-    <MainModal @click="resetError" v-if="oneBeerError">
-      <MainError>Something went wrong. Try again later</MainError>
-    </MainModal>
+    <Transition name="main-page__modal">
+      <MainModal v-if="isLoading">
+        <MainLoader />
+      </MainModal>
+    </Transition>
+    <Transition name="main-page__modal">
+      <MainModal @click="resetError" v-if="oneBeerError">
+        <MainError>Something went wrong. Try again later</MainError>
+      </MainModal>
+    </Transition>
   </div>
 </template>
 
@@ -68,5 +72,15 @@ export default {
   &__main {
     flex: 1 1 auto;
   }
+}
+
+.product-page__modal-enter-active,
+.product-page__modal-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.product-page__modal-enter-from,
+.product-page__modal-leave-to {
+  opacity: 0;
 }
 </style>

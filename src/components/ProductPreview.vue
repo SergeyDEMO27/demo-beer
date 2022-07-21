@@ -259,7 +259,6 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-// import ProductInfo from "@/components/ProductInfo";
 
 export default {
   name: "ProductPreview",

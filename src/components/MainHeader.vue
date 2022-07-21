@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import MainNavigation from "@/components/MainNavigation.vue";
 import MainSocial from "@/components/MainSocial.vue";
 
@@ -61,6 +62,9 @@ export default {
     };
   },
   methods: {
+    ...mapMutations({
+      setHeaderState: "headerModule/setHeaderState",
+    }),
     showHeader() {
       this.isShowHeader = true;
     },
@@ -76,6 +80,11 @@ export default {
         return;
       }
       this.isShowHeader = currentScrollPosition <= 40;
+    },
+  },
+  watch: {
+    isShowHeader() {
+      this.setHeaderState(this.isShowHeader);
     },
   },
   mounted() {
