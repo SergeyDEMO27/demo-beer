@@ -4,7 +4,6 @@ export default {
   }),
   mutations: {
     setHeaderState(state, value) {
-      console.log(value);
       state.isHeaderShow = value;
     },
   },
