@@ -1,24 +1,16 @@
-# demo-beer
+## 'The Demo-Beer'
 
-## Project setup
-```
-npm install
-```
+'The Demo-Beer' - адаптивный сервис, в котором можно найти пивные рецепты на любой вкус, воспользовавшись фильтрами: по названию, содержанию алкоголя, цвету и любимым закускам.
 
-### Compiles and hot-reloads for development
-```
+Ссылка на сервис 'The Demo-Beer' - https://demo-beer-demo27.vercel.app/
+
+### `Установка локально`
+
+1. Установите Node.js последней версии в систему глобально (установка JavaScript).
+2. Склонируйте созданный репозиторий проекта локально (git clone https://github.com/edji777/demo-beer).
+3. Перейдите в директорию склонированного проекта (cd demo-beer).
+4. Выполните установку зависимостей (npm install).
+
+### `Запуск проекта`
+
 npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

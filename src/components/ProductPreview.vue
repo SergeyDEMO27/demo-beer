@@ -100,7 +100,10 @@
                     <p>
                       <span>{{ oneBeer.mashTempF }}℉</span>
                       <span>{{ oneBeer.mashTemp }}℃</span>
-                      <span>{{ oneBeer.mashDur }}min</span>
+                      <span v-if="oneBeer.mashDur">
+                        {{ oneBeer.mashDur }}min
+                      </span>
+                      <span v-else></span>
                     </p>
                   </li>
                   <li
