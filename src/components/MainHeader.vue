@@ -72,7 +72,7 @@ export default {
       this.isShowHeader = currentScrollPosition <= 40;
     },
     onMouseMove(e) {
-      if (e.clientY <= 5) {
+      if (document.documentElement.scrollTop <= 40 || e.clientY <= 5) {
         this.isShowHeader = true;
       } else if (e.clientY > 59) {
         this.isShowHeader = false;
