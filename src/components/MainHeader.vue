@@ -4,8 +4,6 @@
     :class="{
       'main-header--hidden': !isShowHeader,
     }"
-    @mouseover="showHeader"
-    @mouseout="hideHeader"
   >
     <div class="main-header__container">
       <div class="main-header__logo">
@@ -65,14 +63,6 @@ export default {
     ...mapMutations({
       setHeaderState: "headerModule/setHeaderState",
     }),
-    showHeader() {
-      this.isShowHeader = true;
-    },
-    hideHeader() {
-      if (window.scrollY > 40) {
-        this.isShowHeader = false;
-      }
-    },
     onScroll() {
       const currentScrollPosition =
         window.scrollY || document.documentElement.scrollTop;
@@ -80,6 +70,13 @@ export default {
         return;
       }
       this.isShowHeader = currentScrollPosition <= 40;
+    },
+    onMouseMove(e) {
+      if (e.clientY <= 5) {
+        this.isShowHeader = true;
+      } else if (e.clientY > 59) {
+        this.isShowHeader = false;
+      }
     },
   },
   watch: {
@@ -89,9 +86,11 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
+    window.addEventListener("mousemove", this.onMouseMove);
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("mousemove", this.onMouseMove);
   },
 };
 </script>
